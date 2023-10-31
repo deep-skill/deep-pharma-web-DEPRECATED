@@ -18,9 +18,9 @@ describe("Home", () => {
   it("renders the text: 'Welcome everyone'", () => {
     render(<Home />);
 
-    const paragraph = screen.getByText("Welcome everyone");
+    const paragraph = screen.getByText("Welcome");
 
     expect(paragraph).toBeInTheDocument();
-    expect(paragraph.tagName).toBe("P");
+    expect(paragraph.tagName).toBe("H2");
   });
 });
