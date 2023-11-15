@@ -14,46 +14,42 @@ export default function Home() {
 
   if (isLoading)
     return (
-      <div className="flex w-screen h-screen items-center  justify-center">
+      <div className="flex w-screen h-screen items-center justify-center">
         Loading...
       </div>
     );
   if (error) return <div>{error.message}</div>;
 
   if (user) {
-    const roles: any = user.deep_pharma_user_roles;
-    console.log("USER: ", user);
+    const roles: any = user.user_roles;
 
     return (
       <div
-        className={`flex flex-col py-10 gap-4 items-center justify-center h-screen w-screen 
+        className={`flex flex-col p-4 gap-4 h-screen w-screen 
           ${background[roles[0]]}
         `}
       >
-        <div className="p-4 bg-white shadow-lg rounded">
-          <img
-            className="rounded-md w-full mb-6"
-            src={user.picture}
-            alt={user.name}
-          />
-          <h1>{user.name}</h1>
-          <p>{user.email}</p>
-        </div>
-
-        <div className="flex gap-8">
-          <Link
-            className="py-2 px-6 rounded-lg bg-amber-700 text-white"
-            href="/prueba"
-          >
-            Private route
-          </Link>
-
+        <div className="flex justify-end gap-8">
           <a
             className="py-2 px-6 rounded-lg bg-sky-700 text-white"
             href="/api/auth/logout"
           >
             Log out
           </a>
+        </div>
+
+        <div className="flex flex-col items-center justify-center w-full h-full">
+          <div className="p-4 bg-white shadow-lg rounded">
+            {user.picture && user.name && (
+              <img
+                className="rounded-md w-full mb-6"
+                src={user.picture}
+                alt={user.name}
+              />
+            )}
+            <h1>{user.name}</h1>
+            <p>{user.email}</p>
+          </div>
         </div>
       </div>
     );

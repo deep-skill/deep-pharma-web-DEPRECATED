@@ -4,7 +4,7 @@ export const GET = handleAuth({
   login: handleLogin({
     authorizationParams: {
       audience: "https://deep-pharma.com",
-      scope: "openid profile email read:admin read:owner read:seller",
+      scope: "openid profile email",
     },
   }),
 });
