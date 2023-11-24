@@ -1,30 +1,28 @@
-"use client";
-
-import { useUser } from "@auth0/nextjs-auth0/client";
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import Loading from './loading';
 
 const background: any = {
-  Owner: "bg-amber-500",
-  Admin: "bg-blue-500",
-  Seller: "bg-green-500",
+  Owner: 'bg-amber-500',
+  Admin: 'bg-blue-500',
+  Seller: 'bg-green-500',
 };
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
 
-  if (isLoading)
-    return (
-      <div className="flex w-screen h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
-  if (error) return <div>{error.message}</div>;
+  if (isLoading) return <Loading></Loading>;
 
-  if (user) {
+  if (error != null) return <div>{error.message}</div>;
+
+  if (user != null) {
     const roles: any = user.user_roles;
 
     return (
       <div
-        className={`flex flex-col p-4 gap-4 h-screen w-screen 
+        className={`flex flex-col p-4 gap-4 h-screen w-screen
           ${background[roles[0]]}
         `}
       >
@@ -39,8 +37,8 @@ export default function Home() {
 
         <div className="flex flex-col items-center justify-center w-full h-full">
           <div className="p-4 bg-white shadow-lg rounded">
-            {user.picture && user.name && (
-              <img
+            {user.picture != null && user.name != null && (
+              <Image
                 className="rounded-md w-full mb-6"
                 src={user.picture}
                 alt={user.name}
