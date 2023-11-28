@@ -11,7 +11,7 @@ const background: any = {
 };
 
 export default function Page() {
-  const { user, error, isLoading } = useUser();
+  const { user, isLoading } = useUser();
 
   if (isLoading) return <Loading />;
 
