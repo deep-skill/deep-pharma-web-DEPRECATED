@@ -50,11 +50,13 @@ export default function Page() {
   return (
     <main className="h-creen w-full flex flex-col gap-8 items-center p-12">
       <Search
+        width="md"
+        debouncedDelay={500}
         placeHolder="Search products..."
         handleSearch={handleSearchProducts}
       />
 
-      <section className="w-3/5 flex flex-wrap gap-4 justify-center">
+      <section className="w-[40rem] flex flex-wrap gap-4 justify-center">
         {productsViewed !== null ? (
           productsViewed.map((product) => {
             return (

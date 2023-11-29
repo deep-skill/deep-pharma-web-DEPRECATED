@@ -1,26 +1,34 @@
 import { useDebouncedCallback } from 'use-debounce';
 
 interface SearchProps {
-  backgroundColor?: string;
   placeHolder?: string;
+  width?: 'lg' | 'md' | 'sm';
+  debouncedDelay: number;
   handleSearch: (value: string) => void;
 }
 
-const Search = ({ placeHolder, handleSearch }: SearchProps) => {
-  const handleChange: any = useDebouncedCallback(
+const Search = ({
+  placeHolder,
+  width,
+  debouncedDelay,
+  handleSearch,
+}: SearchProps) => {
+  const handleChange = useDebouncedCallback(
     (value) => handleSearch(value),
-    500,
+    debouncedDelay,
   );
 
   return (
-    <>
-      <input
-        className="h-12 min-w-[20rem] w-3/5 px-5 rounded-md outline-none shadow-md shadow-zinc-300 focus:border-[1px] transition-all"
-        type="text"
-        placeholder={placeHolder}
-        onChange={(e) => handleChange(e.target.value)}
-      />
-    </>
+    <input
+      className={`h-12 min-w-[20rem] px-5 rounded-md outline-none shadow-md shadow-zinc-300 focus:border-[1px] transition-all
+        ${width === 'lg' ? 'w-[50rem]' : ''}
+        ${width === 'md' ? 'w-[40rem]' : ''}
+        ${width === 'sm' ? 'w-[30rem]' : ''}
+      `}
+      type="text"
+      placeholder={placeHolder}
+      onChange={(e) => handleChange(e.target.value)}
+    />
   );
 };
 

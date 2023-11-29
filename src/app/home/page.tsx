@@ -15,12 +15,13 @@ export default function Page() {
 
   if (isLoading) return <Loading />;
 
-  return (
-    user && (
+  if (user) {
+    const userRole = (user?.user_roles as Array<string>)[0];
+    return (
       <div
         className={`flex flex-col p-4 gap-4 h-screen w-screen
-      ${background[(user?.user_roles as Array<string>)[0]]}
-      `}
+          ${background[userRole]}
+        `}
       >
         <div className="flex justify-end gap-8">
           <a
@@ -47,6 +48,6 @@ export default function Page() {
           </div>
         </div>
       </div>
-    )
-  );
+    );
+  }
 }
