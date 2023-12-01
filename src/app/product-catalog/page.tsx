@@ -4,47 +4,55 @@ import Search from '@/components/Search';
 import { useState, useEffect } from 'react';
 
 type Product = {
-  category: {
-    creationAt: string;
-    id: number;
-    image: string;
-    name: string;
-    updatedAt: string;
-  };
-  creationAt: string;
+  brand_id: number;
+  created_at: string;
+  deleted_at: string | null;
   description: string;
   id: number;
-  images: string[];
-  price: number;
-  title: string;
-  updatedAt: string;
+  name: string;
+  prescription_required: number;
+  updated_at: string;
 };
 
+async function fetchData(url: string) {
+  try {
+    const result = await fetch(`http://localhost:3001/${url}`);
+    return await result.json();
+  } catch (error) {
+    throw new Error(`something went wrong: ${error}`);
+  }
+}
+
 export default function Page() {
-  const [allProducts, setAllProducts] = useState<Product[] | null>(null);
-  const [productsViewed, setProductsViewed] = useState<Product[] | null>(null);
+  const [products, setProducts] = useState<Product[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products')
-      .then((response) => response.json())
-      .then((data) => {
-        setAllProducts(data);
-        setProductsViewed(data);
-      });
+    setLoading(true);
+    (async () => {
+      try {
+        const data = await fetchData('product');
+        setProducts(data);
+      } finally {
+        console.log('Hello from finally');
+        setLoading(false);
+      }
+    })();
   }, []);
 
-  const handleSearchProducts = (value: string) => {
-    setProductsViewed(() => {
-      if (allProducts !== null) {
-        return allProducts.filter((product) => {
-          return product.title
-            .toLocaleLowerCase()
-            .includes(value.toLocaleLowerCase());
-        });
+  const handleSearchProducts = async (value: string) => {
+    setLoading(true);
+    try {
+      if (value) {
+        const data = await fetchData(`product/name/${value}`);
+        setProducts(data);
       } else {
-        return null;
+        const data = await fetchData('product');
+        setProducts(data);
       }
-    });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,25 +65,24 @@ export default function Page() {
       />
 
       <section className="w-[40rem] flex flex-wrap gap-4 justify-center">
-        {productsViewed !== null ? (
-          productsViewed.map((product) => {
+        {loading ? (
+          <div>Loading...</div>
+        ) : products?.length ? (
+          products.map((product) => {
             return (
-              <div className="p-5 flex gap-4 w-full rounded-lg shadow-md shadow-slate-300">
-                <img
-                  src={product.category.image}
-                  alt={product.title}
-                  className="h-32 w-32 rounded"
-                />
-                <div className="flex flex-col gap-2">
-                  <h3 className="">{product.title}</h3>
-                  <p className="">{product.description}</p>
-                  <p className="">{product.category.name}</p>
-                </div>
+              <div className="w-[40rem] p-5 shadow-md shadow-slate-300 flex flex-col gap-4">
+                <h3 className="text-xl setProducts">{product.name}</h3>
+                <p className="text-slate-500">{product.description}</p>
+                <p className="text">
+                  {`Prescription required: ${
+                    product.prescription_required === 1 ? 'Yes' : 'No'
+                  }`}
+                </p>
               </div>
             );
           })
         ) : (
-          <div>Not products found</div>
+          <div>No products found</div>
         )}
       </section>
     </main>
