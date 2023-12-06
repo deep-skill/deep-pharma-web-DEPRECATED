@@ -9,7 +9,7 @@ export default function Page() {
                 <TableTag />
             </div>
             <div >
-                <Link href={"/forms/tag/create"} className='bg-white p-2 m-2 rounded'>Agregar Marca</Link>
+                <Link href={"/forms/tag/create"} className='bg-white p-2 m-2 rounded'>Agregar Tag</Link>
             </div>
         </section>
     );

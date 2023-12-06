@@ -31,6 +31,7 @@ const TableTag: React.FC = () => {
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
+                        <th>Categoria</th>
                         <th>Editar</th>
                         <th>Eliminado</th>
                     </tr>
