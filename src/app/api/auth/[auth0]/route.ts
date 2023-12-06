@@ -6,5 +6,6 @@ export const GET = handleAuth({
       audience: 'https://deep-pharma.com',
       scope: 'openid profile email',
     },
+    returnTo: '/home',
   }),
 });
