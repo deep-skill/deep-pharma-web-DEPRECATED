@@ -1,37 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deep Pharma WEB
 
-## Getting Started
+### Environment
 
-First, run the development server:
+Create a .env.local file in the root of the project and after that paste the following variables:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```env
+AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
+AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_ISSUER_BASE_URL='https://dev-uixinfh3gv6txepg.us.auth0.com'
+AUTH0_CLIENT_ID='ZCE5SDYWM9dWZYw8TiU13ZdEMmkS1DfK'
+AUTH0_CLIENT_SECRET='nyfoqFiIXqSS3S--YfY2FPTqwFQigJL51CIs_LC9qjSrhsKhpHFwisSmqr2jSFfW'
+AUTH0_AUDIENCE='https://deep-pharma.com/'
+AUTH0_SCOPE='openid profile email'
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will automatically connect our Next.js with Auth0
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open the project in your code editor, open a terminal and run the following commands to install the necessary dependencies and initialize the project.
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Storybook
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Storybook is a standalone Next.js tool that allows you to develop, display and test React components in isolation. It facilitates the creation, organization and visualization of components without running the entire application. By integrating it into a Next.js project, you can create "stories" for each component, allowing you to view them in different states and with various props.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To open the storybook server, run the following command:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# pharma-api
+```bash
+npm run storybook
+```
