@@ -39,6 +39,12 @@ export default function Home() {
             Home Page
           </Link>
         )}
+        <Link
+            href="/forms/brand"
+            className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
+          >
+            formulario  brand
+          </Link>
       </section>
     </main>
   );
