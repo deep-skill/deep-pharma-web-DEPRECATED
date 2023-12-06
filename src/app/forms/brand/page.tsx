@@ -1,4 +1,4 @@
-import CreateBrand from "@/components/brand/createBrand";
+import Link from 'next/link';
 import UpdateBrand from "@/components/brand/updateBrand";
 import TableBrand from "@/components/brand/tableGetAllBrand";
 
@@ -11,12 +11,7 @@ export default function Page() {
                 <TableBrand />
             </div>
             <div >
-                <h2 className="text-2xl ">Formulario Crear Brand</h2>
-                <CreateBrand />
-            </div>
-            <div>
-                <h2 className="text-2xl ">Formulario Editar Brand</h2>
-                <UpdateBrand  idBrand={1} />
+                <Link href={"/forms/brand/create"} className='bg-white p-2 m-2 rounded'>Agregar Marca</Link>
             </div>
         </section>
     );

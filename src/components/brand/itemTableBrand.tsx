@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+import Link from 'next/link';
 import { Brand } from "./Brand";
 
 interface ItemTableBrandProps {
@@ -25,10 +26,9 @@ const ItemTableBrand: React.FC<ItemTableBrandProps> = ({ brand , reloadBrand }) 
         <tr key={brand.id}>
             <td>{brand.id}</td>
             <td>{brand.name}</td>
-            <td>{brand.created_at}</td>
-            <td>{brand.updated_at}</td>
+            <td><Link href={`brand/${brand.id}`} className="bg-green-400 p-1 m-2 rounded hover:bg-green-500 active:bg-green-700">Modificar</Link></td>
             <td>
-                <button onClick={() => deleteBrand(brand.id , reloadBrand)} className="bg-red-300">eliminar</button>
+                <button onClick={() => deleteBrand(brand.id , reloadBrand)} className="bg-red-400 p-1 m-2 rounded hover:bg-red-500 active:bg-red-700">eliminar</button>
             </td>
         </tr>
     )

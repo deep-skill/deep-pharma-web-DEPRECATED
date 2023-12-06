@@ -30,7 +30,7 @@ const UpdateBrand: React.FC<UpdateBrandProps> = ({ idBrand }) => {
                 <input className="p-2 w-full" {...register('name', { required: true })} />
             </div>
             <div className="flex flex-col">
-                <button className="p-2 m-2 bg-slate-500" type="submit">
+                <button className='bg-slate-400 p-1 m-2 rounded hover:bg-slate-500 active:bg-slate-700' type="submit">
                     Submit
                 </button>
             </div>

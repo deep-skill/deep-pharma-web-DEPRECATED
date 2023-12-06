@@ -17,7 +17,6 @@ const TableBrand: React.FC = () => {
                 console.log(error);
             }
         };
-
         fetchData();
     }, [reload]);
 
@@ -32,8 +31,7 @@ const TableBrand: React.FC = () => {
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
-                        <th>Alta</th>
-                        <th>Modificado</th>
+                        <th>Editar</th>
                         <th>Eliminado</th>
                     </tr>
                 </thead>
