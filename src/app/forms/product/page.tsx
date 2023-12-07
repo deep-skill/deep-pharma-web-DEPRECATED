@@ -11,7 +11,7 @@ const PageProduct = () =>{
                     <TableProduct/>
                 </div>
                 <div >
-                    <Link href={"/forms/tag/create"} className='bg-white p-2 m-2 rounded'>Agregar Producto</Link>
+                    <Link href={"/forms/product/create"} className='bg-white p-2 m-2 rounded'>Agregar Producto</Link>
                 </div>
             </section>
         

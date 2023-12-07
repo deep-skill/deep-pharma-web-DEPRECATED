@@ -11,7 +11,7 @@ const TableTag: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const tagsData = await getAllBrand();
+                const tagsData = await getAllTag();
                 setTags(tagsData);
             } catch (error) {
                 console.log(error);
@@ -19,7 +19,7 @@ const TableTag: React.FC = () => {
         };
         fetchData();
     }, [reload]);
-
+    
     const reloadTag = () =>{
         setReload(!reload)
     }
@@ -38,7 +38,7 @@ const TableTag: React.FC = () => {
                 </thead>
                 <tbody>
                     {tags.map((tag) => (
-                        <ItemTableBrand tag={tag} reloadTag={reloadTag} />
+                        <ItemTableBrand key={tag.id} tag={tag} reloadTag={reloadTag} />
                     ))}
                 </tbody>
             </table>
@@ -46,7 +46,7 @@ const TableTag: React.FC = () => {
     );
 };
 
-async function getAllBrand(): Promise<Tag[]> {
+async function getAllTag(): Promise<Tag[]> {
     try {
         const response = await axios.get("http://localhost:3001/tag");
         return response.data;

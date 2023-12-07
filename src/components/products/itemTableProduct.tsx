@@ -9,10 +9,8 @@ interface ItemTableProductProps {
 }
 
 async function deleteProduct(id: number, reloadProduct: () => void) {
-    console.log("entro a delete")
     try {
         const response = await axios.delete(`http://localhost:3001/product/${id}`);
-        console.log(response);
         reloadProduct();
     } catch (error) {
         console.log(error);
@@ -26,7 +24,6 @@ const ItemTableProduct: React.FC<ItemTableProductProps> = ({ product, reloadProd
         if (require == 0) return "No requerida";
         return "Es requerida";
     }
-
     return (
         <tr key={product.id}>
             <td>{product.id}</td>

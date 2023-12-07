@@ -39,7 +39,7 @@ const TableProduct: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((product) => <ItemTableProduct product={product} reloadProduct={reloadProduct}/>)}
+                    {products.map(product  => <ItemTableProduct key={product.id} product={product} reloadProduct={reloadProduct}/>)}
                 </tbody>
             </table>
         </div>
@@ -49,7 +49,8 @@ const TableProduct: React.FC = () => {
 async function getAllProducts(): Promise<Product[]> {
     try {
         const response = await axios.get("http://localhost:3001/product");
-        return response.data;
+        const filteredProducts = response.data.filter((product: Product) => !product.deleted_at);
+        return filteredProducts;
     } catch (error) {
         console.log(error);
         return [];
