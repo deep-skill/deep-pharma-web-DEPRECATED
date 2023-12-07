@@ -13,7 +13,7 @@ type FormValues = {
     tagIds: Array<number>
 }
 
-const updateProductAxios = async (data: FormValues , id: number) => {
+const updateProductAxios = async (data: FormValues, id: number) => {
     try {
         await axios.put(`http://localhost:3001/product/${id}`, data)
     } catch (error) {
@@ -25,8 +25,8 @@ type UpdateProductProps = {
     idProduct: number;
 };
 
-const UpdateProduct: React.FC<UpdateProductProps> = ({ idProduct })=> {
-    const { register, handleSubmit } = useForm<FormValues>()
+const UpdateProduct: React.FC<UpdateProductProps> = ({ idProduct }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
     const [brands, setBrands] = useState<Brand[]>([]);
     const [tags, setTags] = useState<Tag[]>([]);
 
@@ -41,7 +41,7 @@ const UpdateProduct: React.FC<UpdateProductProps> = ({ idProduct })=> {
                 return tagId;
             });
         }
-        updateProductAxios(data , idProduct)
+        updateProductAxios(data, idProduct)
     }
 
     useEffect(() => {
@@ -69,11 +69,39 @@ const UpdateProduct: React.FC<UpdateProductProps> = ({ idProduct })=> {
         <form className="flex flex-col  gap-2 " onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col ">
                 <label htmlFor="brand">Nombre Producto</label>
-                <input className="p-2 w-full"  {...register('name', { required: true })} />
+                <input
+                    className="p-2 w-full"
+                    {...register('name', {
+                        required: 'El nombre es obligatorio',
+                        minLength: {
+                            value: 3,
+                            message: 'El nombre debe tener al menos 3 caracter'
+                        },
+                        maxLength: {
+                            value: 50,
+                            message: 'El nombre no puede exceder los 50 caracteres'
+                        }
+                    })}
+                />
+                {errors.name && <p className="text-red-500">{errors.name.message}</p>}
             </div>
             <div className="flex flex-col ">
                 <label htmlFor="brand">Description</label>
-                <input className="p-2 w-full"  {...register('description', { required: true })} />
+                <input
+                    className="p-2 w-full"
+                    {...register('description', {
+                        required: 'La descripcion es obligatorio',
+                        minLength: {
+                            value: 3,
+                            message: 'La descripcion debe tener al menos 3 caracter'
+                        },
+                        maxLength: {
+                            value: 50,
+                            message: 'La descripcion no puede exceder los 50 caracteres'
+                        }
+                    })}
+                />
+                {errors.description && <p className="text-red-500">{errors.description.message}</p>}
             </div>
             <div className="flex flex-col">
                 <label htmlFor="prescriptionRequired">Prescription Requerida?</label>

@@ -23,14 +23,14 @@ const createProductAxios = async (data: FormValues) => {
 }
 
 export default function CreateProduct() {
-    const { register, handleSubmit } = useForm<FormValues>()
+    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
     const [brands, setBrands] = useState<Brand[]>([]);
     const [tags, setTags] = useState<Tag[]>([]);
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         if (typeof data.brandId === 'string') data.brandId = parseInt(data.brandId, 10);
         if (typeof data.prescriptionRequired === 'string') data.prescriptionRequired = parseInt(data.prescriptionRequired, 10);
-        
+
         if (Array.isArray(data.tagIds)) {
             data.tagIds = data.tagIds.map((tagId) => {
                 if (typeof tagId === 'string') {
@@ -67,28 +67,61 @@ export default function CreateProduct() {
         <form className="flex flex-col  gap-2 " onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col ">
                 <label htmlFor="brand">Nombre Producto</label>
-                <input className="p-2 w-full"  {...register('name', { required: true })} />
+                <input
+                    className="p-2 w-full"
+                    {...register('name', {
+                        required: 'El nombre es obligatorio',
+                        minLength: {
+                            value: 3,
+                            message: 'El nombre debe tener al menos 3 caracter'
+                        },
+                        maxLength: {
+                            value: 50,
+                            message: 'El nombre no puede exceder los 50 caracteres'
+                        }
+                    })}
+                />
+                {errors.name && <p className="text-red-500">{errors.name.message}</p>}
             </div>
             <div className="flex flex-col ">
                 <label htmlFor="brand">Description</label>
-                <input className="p-2 w-full"  {...register('description', { required: true })} />
+                <input
+                    className="p-2 w-full"
+                    {...register('description', {
+                        required: 'La descripcion es obligatorio',
+                        minLength: {
+                            value: 3,
+                            message: 'La descripcion debe tener al menos 3 caracter'
+                        },
+                        maxLength: {
+                            value: 50,
+                            message: 'La descripcion no puede exceder los 50 caracteres'
+                        }
+                    })}
+                />
+                {errors.description && <p className="text-red-500">{errors.description.message}</p>}
             </div>
             <div className="flex flex-col">
                 <label htmlFor="prescriptionRequired">Prescription Requerida?</label>
-                <select className="p-2 w-full" {...register('prescriptionRequired', { required: true })}>
+                <select className="p-2 w-full" {...register('prescriptionRequired', { required: 'La prescription es obligatorio' })}>
+                    <option value="0">Eliga una opcion</option>
                     <option value="1">Sí</option>
                     <option value="0">No</option>
                 </select>
+                {errors.prescriptionRequired && <p className="text-red-500">{errors.prescriptionRequired.message}</p>}
             </div>
             <div className="flex flex-col">
                 <label htmlFor="brand">Elija marca</label>
                 <select className="p-2 w-full" {...register('brandId', { required: true })}>
+                    <option value="0">Eliga marca</option>
                     {brands.map((brand) => (
                         <option key={brand.id} value={brand.id}>
                             {brand.name}
                         </option>
                     ))}
+
                 </select>
+                {errors.brandId && <p className="text-red-500">{errors.brandId.message}</p>}
             </div>
             <div className="flex flex-col">
                 <label htmlFor="tags">Elija etiqueta</label>
@@ -99,6 +132,7 @@ export default function CreateProduct() {
                         </option>
                     ))}
                 </select>
+                {errors.tagIds && <p className="text-red-500">{errors.tagIds.message}</p>}
             </div>
             <div className="flex flex-col ">
                 <button className='p-2 m-2 bg-slate-500 rounded' type="submit">Submit</button>
