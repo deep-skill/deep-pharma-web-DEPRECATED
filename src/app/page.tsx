@@ -51,6 +51,12 @@ export default function Home() {
           >
             seccion tags
           </Link>
+        <Link
+            href="/forms/product"
+            className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
+          >
+            seccion product
+          </Link>
       </section>
     </main>
   );
