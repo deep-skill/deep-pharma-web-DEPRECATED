@@ -15,10 +15,8 @@ type FormValues = {
 }
 
 const createProductAxios = async (data: FormValues) => {
-console.log(data)
     try {
-        let response = await axios.post('http://localhost:3001/product', data)
-        console.log(response)
+        await axios.post('http://localhost:3001/product', data)
     } catch (error) {
         console.log(error)
     }
@@ -30,12 +28,9 @@ export default function CreateProduct() {
     const [tags, setTags] = useState<Tag[]>([]);
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        if (typeof data.brandId === 'string') {
-            data.brandId = parseInt(data.brandId, 10);
-        }
-        if (typeof data.prescriptionRequired === 'string') {
-            data.prescriptionRequired = parseInt(data.prescriptionRequired, 10);
-        }
+        if (typeof data.brandId === 'string') data.brandId = parseInt(data.brandId, 10);
+        if (typeof data.prescriptionRequired === 'string') data.prescriptionRequired = parseInt(data.prescriptionRequired, 10);
+        
         if (Array.isArray(data.tagIds)) {
             data.tagIds = data.tagIds.map((tagId) => {
                 if (typeof tagId === 'string') {

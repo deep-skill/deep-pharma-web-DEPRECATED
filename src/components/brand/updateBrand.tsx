@@ -12,8 +12,7 @@ type UpdateBrandProps = {
 
 const updateBranAxios = async (data: FormValues, id: number) => {
     try {
-        let response = await axios.put(`http://localhost:3001/brand/${id}`, data)
-        console.log(response)
+        await axios.put(`http://localhost:3001/brand/${id}`, data)
     } catch (error) {
         console.log(error)
     }

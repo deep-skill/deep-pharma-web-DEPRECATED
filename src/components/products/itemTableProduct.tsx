@@ -10,7 +10,7 @@ interface ItemTableProductProps {
 
 async function deleteProduct(id: number, reloadProduct: () => void) {
     try {
-        const response = await axios.delete(`http://localhost:3001/product/${id}`);
+        await axios.delete(`http://localhost:3001/product/${id}`);
         reloadProduct();
     } catch (error) {
         console.log(error);
@@ -19,11 +19,11 @@ async function deleteProduct(id: number, reloadProduct: () => void) {
 
 
 const ItemTableProduct: React.FC<ItemTableProductProps> = ({ product, reloadProduct }) => {
-
     const prescriptionText = (require: number): string => {
         if (require == 0) return "No requerida";
         return "Es requerida";
     }
+    
     return (
         <tr key={product.id}>
             <td>{product.id}</td>

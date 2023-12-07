@@ -9,8 +9,7 @@ type FormValues = {
 
 const createBranAxios = async (data: FormValues) => {
     try {
-        let response = await axios.post('http://localhost:3001/brand', data)
-        console.log(response)
+        await axios.post('http://localhost:3001/brand', data)
     } catch (error) {
         console.log(error)
     }

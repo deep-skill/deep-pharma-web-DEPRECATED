@@ -9,10 +9,8 @@ type FormValues = {
 }
 
 const createTagAxios = async (data: FormValues) => {
-    console.log(data)
     try {
-        let response = await axios.post('http://localhost:3001/tag', data)
-        console.log(response)
+        await axios.post('http://localhost:3001/tag', data)
     } catch (error) {
         console.log(error)
     }

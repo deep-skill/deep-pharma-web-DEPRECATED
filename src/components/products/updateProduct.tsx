@@ -15,7 +15,7 @@ type FormValues = {
 
 const updateProductAxios = async (data: FormValues , id: number) => {
     try {
-        let response = await axios.put(`http://localhost:3001/product/${id}`, data)
+        await axios.put(`http://localhost:3001/product/${id}`, data)
     } catch (error) {
         console.log(error)
     }
