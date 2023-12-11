@@ -7,9 +7,9 @@ Create a .env.local file in the root of the project and after that paste the fol
 ```env
 AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
 AUTH0_BASE_URL='http://localhost:3000'
-AUTH0_ISSUER_BASE_URL='https://dev-uixinfh3gv6txepg.us.auth0.com'
-AUTH0_CLIENT_ID='ZCE5SDYWM9dWZYw8TiU13ZdEMmkS1DfK'
-AUTH0_CLIENT_SECRET='nyfoqFiIXqSS3S--YfY2FPTqwFQigJL51CIs_LC9qjSrhsKhpHFwisSmqr2jSFfW'
+AUTH0_ISSUER_BASE_URL='https://dev-nqzpabibd42atqci.us.auth0.com'
+AUTH0_CLIENT_ID='nYQbbJa5MuCYiyyRiOIrTYwRw6drEQuy'
+
 AUTH0_AUDIENCE='https://deep-pharma.com/'
 AUTH0_SCOPE='openid profile email'
 ```
