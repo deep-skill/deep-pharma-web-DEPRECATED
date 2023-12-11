@@ -3,6 +3,7 @@
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
 import Loading from '../loading';
+import Link from 'next/link';
 
 const background: any = {
   Owner: 'bg-amber-500',
@@ -12,23 +13,20 @@ const background: any = {
 
 export default function Page() {
   const { user, isLoading } = useUser();
-
   if (isLoading) return <Loading />;
 
   return (
     user && (
       <div
-        className={`flex flex-col p-4 gap-4 h-screen w-screen
-      ${background[(user?.user_roles as Array<string>)[0]]}
-      `}
+        className={`flex flex-col p-4 gap-4 h-screen w-screen bg-amber-500`}
       >
         <div className="flex justify-end gap-8">
-          <a
+          <Link
             className="py-2 px-6 rounded-lg bg-sky-700 text-white"
             href="/api/auth/logout"
           >
             Log out
-          </a>
+          </Link>
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full">

@@ -17,12 +17,12 @@ export default function Home() {
       <section className="flex flex-grow justify-center items-center gap-6">
         {user == null ? (
           <>
-            <a
+            <Link
               href="/api/auth/login"
               className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
             >
               Inicio de sesión
-            </a>
+            </Link>
 
             <Link
               href="/product-catalog"
