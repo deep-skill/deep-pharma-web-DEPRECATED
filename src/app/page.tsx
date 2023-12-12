@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Loading from './loading';
 import Link from 'next/link';
@@ -15,14 +15,14 @@ export default function Home() {
     <main className="w-full h-screen flex flex-col p-12">
       <h1 className="text-4xl font-semibold">DEEP PHARMA</h1>
       <section className="flex flex-grow justify-center items-center gap-6">
-        {!user ? (
+        {user == null ? (
           <>
-            <a
+            <Link
               href="/api/auth/login"
               className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
             >
               Inicio de sesión
-            </a>
+            </Link>
 
             <Link
               href="/product-catalog"

@@ -1,7 +1,13 @@
-import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import { handleAuth } from '@auth0/nextjs-auth0';
 
-export const GET = handleAuth({
+export const GET = handleAuth();
+
+/* export const GET = handleAuth({
   login: handleLogin({
-    returnTo: '/home',
+    authorizationParams: {
+      audience: 'http://localhost:3000',
+      scope: 'openid profile email',
+    },
+    returnTo: '/',
   }),
-});
+}); */
