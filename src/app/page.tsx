@@ -39,6 +39,24 @@ export default function Home() {
             Home Page
           </Link>
         )}
+        <Link
+            href="forms/brand"
+            className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
+          >
+            brands
+          </Link>
+        <Link
+            href="forms/product"
+            className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
+          >
+            product
+          </Link>
+        <Link
+            href="forms/tag"
+            className="w-60 text-center py-4 px-6 rounded-lg border-2 border-black"
+          >
+            tag
+          </Link>
       </section>
     </main>
   );
