@@ -1,6 +1,7 @@
-
+"use client"
 import { Tag } from '@/components/tag/Tag';
 import UpdateTag from '@/components/tag/updateTag';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -14,7 +15,7 @@ const getByIdTagAxios = async (id: number): Promise<Tag | undefined> => {
     }
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+const UpdateTagPage  = async ({ params }: { params: { id: number } }) => {
     const tagById = await getByIdTagAxios(params.id)
     if (!tagById) {
         return (
@@ -38,3 +39,4 @@ export default async function Page({ params }: { params: { id: number } }) {
         </section>
     );
 }
+export default withPageAuthRequired(UpdateTagPage);

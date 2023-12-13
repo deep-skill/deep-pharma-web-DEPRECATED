@@ -30,13 +30,13 @@ const NavBar = () => {
         <Link href="/home" className={styleLink}>
           Home Page
         </Link>
-        <Link href="forms/brand" className={styleLink}>
+        <Link href="/forms/brand" className={styleLink}>
           Brands
         </Link>
-        <Link href="forms/product" className={styleLink}>
+        <Link href={"/forms/product"} className={styleLink}>
           Product
         </Link>
-        <Link href="forms/tag" className={styleLink}>
+        <Link href="/forms/tag" className={styleLink}>
           Tag
         </Link>
         <Link
