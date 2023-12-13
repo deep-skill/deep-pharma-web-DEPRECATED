@@ -1,4 +1,5 @@
 import UpdateBrand from '@/components/brand/updateBrand';
+import { AppRouterPageRoute, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import axios from 'axios';
 import Link from 'next/link';
 import { Brand } from "../../../../components/brand/Brand"
@@ -12,7 +13,7 @@ const getByIdBranAxios = async (id: number): Promise<Brand | undefined> => {
     }
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+const  Page : any = async({ params }: { params: { id: number } }) => {
     const brandById = await getByIdBranAxios(params.id)
     if (!brandById) {
         return (
@@ -36,4 +37,4 @@ export default async function Page({ params }: { params: { id: number } }) {
     );
 }
 
-
+export default withPageAuthRequired(Page)

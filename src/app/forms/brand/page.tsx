@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import TableBrand from "@/components/brand/tableGetAllBrand";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default function Page() {
+const Page : any = ( ) => {
     return (
         <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
             <div >
@@ -14,3 +15,7 @@ export default function Page() {
         </section>
     );
 }
+
+export default withPageAuthRequired(Page);
+
+
