@@ -20,14 +20,7 @@ export default function Page() {
       <div
         className={`flex flex-col p-4 gap-4 h-screen w-screen bg-amber-500`}
       >
-        <div className="flex justify-end gap-8">
-          <Link
-            className="py-2 px-6 rounded-lg bg-sky-700 text-white"
-            href="/api/auth/logout"
-          >
-            Log out
-          </Link>
-        </div>
+
 
         <div className="flex flex-col items-center justify-center w-full h-full">
           <div className="p-4 bg-white shadow-lg rounded">
