@@ -7,7 +7,6 @@ import Loading from '../loading';
 const HomePage = () => {
   const { user, isLoading } = useUser();
   if (isLoading) return <Loading />;
-
   return (
     user && (
       <div className={`flex flex-col p-4 gap-4 h-screen w-screen bg-amber-500`}>
