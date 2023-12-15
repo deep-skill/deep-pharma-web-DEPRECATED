@@ -9,8 +9,11 @@ AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
 AUTH0_BASE_URL='http://localhost:3000'
 AUTH0_ISSUER_BASE_URL='https://dev-nqzpabibd42atqci.us.auth0.com'
 AUTH0_CLIENT_ID='nYQbbJa5MuCYiyyRiOIrTYwRw6drEQuy'
+AUTH0_CLIENT_SECRET=
 
-AUTH0_AUDIENCE='https://deep-pharma.com/'
+AUTH0_AUDIENCE='http://localhost:3001/'
+GRANT_TYPE='client_credentials'
+TOKEN_BASE_URL='https://dev-nqzpabibd42atqci.us.auth0.com/oauth/token'
 AUTH0_SCOPE='openid profile email'
 ```
 
