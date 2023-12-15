@@ -45,9 +45,16 @@ const TableBrand: React.FC = () => {
     );
 };
 
+
+
 async function getAllBrand(): Promise<Brand[]> {
     try {
-        const response = await axios.get("http://localhost:3001/brand");
+      const token  = await axios.get('/api/getToken');
+        const response = await axios.get("http://localhost:3001/brand",{
+          headers: {
+            'Authorization': `Bearer ${token.data}`
+        }
+        });
         return response.data;
     } catch (error) {
         console.log(error);
