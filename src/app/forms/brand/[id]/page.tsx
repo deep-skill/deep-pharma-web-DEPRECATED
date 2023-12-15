@@ -7,7 +7,12 @@ import { Brand } from "../../../../components/brand/Brand"
 
 const getByIdBranAxios = async (id: number): Promise<Brand | undefined> => {
     try {
-        let response = await axios.get(`http://localhost:3001/brand/${id}`)
+      const token  = await axios.get('/api/getToken');
+        let response = await axios.get(`http://localhost:3001/brand/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token.data}`
+        }
+        })
         return response.data;
     } catch (error) {
         return undefined
