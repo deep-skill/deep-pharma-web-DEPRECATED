@@ -10,12 +10,7 @@ interface ItemTableBrandProps {
 
 async function deleteBrand(id: number  , reloadBrand:()=> void) {
     try {
-      const token  = await axios.get('/api/getToken');
-        await axios.delete(`http://localhost:3001/brand/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${token.data}`
-        }
-        });
+        await axios.delete(`/api/brand_api/${id}`);
         reloadBrand();
     } catch (error) {
         console.log(error);

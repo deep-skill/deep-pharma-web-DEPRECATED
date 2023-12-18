@@ -1,13 +1,11 @@
 
 import Link from 'next/link';
 import TableBrand from "@/components/brand/tableGetAllBrand";
-import { getAccessToken } from '@auth0/nextjs-auth0';
+
 
 const AllBrandPage = async() => {
-  const accessToken = await getAccessToken();
-  console.log(JSON.stringify(accessToken))
     return (
-        <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
+        <section  className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
             <div >
               <h2 className="text-2xl ">Tabla Todas Las Marcas</h2>
                 <TableBrand />

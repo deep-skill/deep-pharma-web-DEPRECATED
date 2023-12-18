@@ -12,12 +12,7 @@ type UpdateBrandProps = {
 
 const updateBranAxios = async (data: FormValues, id: number) => {
     try {
-      const token  = await axios.get('/api/getToken');
-        await axios.put(`http://localhost:3001/brand/${id}`, data , {
-          headers: {
-            'Authorization': `Bearer ${token.data}`
-        }
-        })
+        await axios.put(`/api/brand_api/${id}`, data )
     } catch (error) {
         console.log(error)
     }

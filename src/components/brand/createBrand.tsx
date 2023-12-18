@@ -7,14 +7,9 @@ type FormValues = {
     name: string
 }
 
-const createBranAxios = async (data: FormValues) => {
+const createBranAxios = async (data: FormValues ) => {
     try {
-      const token  = await axios.get('/api/getToken');
-        await axios.post('http://localhost:3001/brand', data ,{
-          headers: {
-            'Authorization': `Bearer ${token.data}`
-        }
-        })
+        await axios.post('/api/brand_api', data)
     } catch (error) {
         console.log(error)
     }
