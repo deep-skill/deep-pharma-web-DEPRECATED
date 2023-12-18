@@ -1,6 +1,5 @@
-"use client"
+
 import CreateBrand from "@/components/brand/createBrand";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 const CreateBrandPage = () => {
     return (
@@ -12,4 +11,4 @@ const CreateBrandPage = () => {
         </section>
     )
 }
-export default withPageAuthRequired(CreateBrandPage);
+export default CreateBrandPage;

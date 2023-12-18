@@ -1,6 +1,5 @@
 "use client"
 import CreateProduct from "@/components/products/createProduct"
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client"
 
 const PageCreateProduct = () => {
     return (
@@ -13,4 +12,4 @@ const PageCreateProduct = () => {
     )
 }
 
-export default withPageAuthRequired(PageCreateProduct)
+export default PageCreateProduct

@@ -1,7 +1,5 @@
-"use client"
 import { Product } from '@/components/products/Product';
 import UpdateProduct from '@/components/products/updateProduct';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -38,4 +36,4 @@ const UpdateProductPage = async({ params }: { params: { id: number } }) => {
     );
 }
 
-export default withPageAuthRequired(UpdateProductPage)
+export default UpdateProductPage

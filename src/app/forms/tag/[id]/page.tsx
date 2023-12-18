@@ -1,7 +1,5 @@
-"use client"
 import { Tag } from '@/components/tag/Tag';
 import UpdateTag from '@/components/tag/updateTag';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -39,4 +37,4 @@ const UpdateTagPage  = async ({ params }: { params: { id: number } }) => {
         </section>
     );
 }
-export default withPageAuthRequired(UpdateTagPage);
+export default UpdateTagPage;

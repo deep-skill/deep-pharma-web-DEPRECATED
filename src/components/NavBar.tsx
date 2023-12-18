@@ -39,6 +39,9 @@ const NavBar = () => {
         <Link href="/forms/tag" className={styleLink}>
           Tag
         </Link>
+        <Link href="/forms/tag-tag" className={styleLink}>
+          Tag-tag
+        </Link>
         <Link
             className="py-2 px-6 rounded-lg bg-sky-700 text-white"
             href="/api/auth/logout"

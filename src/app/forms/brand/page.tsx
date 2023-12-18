@@ -1,7 +1,6 @@
-"use client"
+
 import Link from 'next/link';
 import TableBrand from "@/components/brand/tableGetAllBrand";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 const AllBrandPage = () => {
     return (
@@ -17,6 +16,6 @@ const AllBrandPage = () => {
     );
 }
 
-export default withPageAuthRequired(AllBrandPage);
+export default AllBrandPage;
 
 

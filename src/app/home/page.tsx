@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
 import Loading from '../loading';
 
@@ -30,4 +30,4 @@ const HomePage = () => {
   );
 }
 
-export default withPageAuthRequired(HomePage);
+export default HomePage;

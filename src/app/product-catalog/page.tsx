@@ -1,6 +1,5 @@
 'use client';
 import Search from '@/components/Search';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { useState, useEffect } from 'react';
 
 type Product = {
@@ -80,7 +79,7 @@ const ProductCatalogPage = () => {
     </main>
   );
 }
-export default withPageAuthRequired(ProductCatalogPage)
+export default ProductCatalogPage
 
 async function fetchData(url: string) {
   try {

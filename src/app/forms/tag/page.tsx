@@ -1,8 +1,5 @@
-"use client"
 import Link from 'next/link';
 import TableTag from "../../../components/tag/tableGetAllTag"
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
-
 
 const AllTagPage = () => {
   return (
@@ -18,4 +15,4 @@ const AllTagPage = () => {
   );
 }
 
-export default withPageAuthRequired(AllTagPage);
+export default AllTagPage;

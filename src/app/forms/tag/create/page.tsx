@@ -1,6 +1,4 @@
-"use client"
 import CreateTag from "@/components/tag/createTag";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 const CreateBrandPage = () => {
     return (
@@ -12,4 +10,4 @@ const CreateBrandPage = () => {
         </section>
     )
 }
-export default withPageAuthRequired(CreateBrandPage);
+export default CreateBrandPage;
