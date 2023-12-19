@@ -1,3 +1,4 @@
+import ModalCreate from "@/components/tag-tag/ModalCreate";
 import SearchTag from "@/components/tag-tag/SearchTag";
 import TableTagTag from "@/components/tag-tag/TableTagTag";
 import TableTagTagSkeleton from "@/components/tag-tag/TableTagTagSkeleton";
@@ -17,7 +18,10 @@ const AllTagPage = ({
 
   return (
     <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
-      <SearchTag placeholder=""/>
+      <div className="flex">
+        <SearchTag placeholder=""/>
+        <ModalCreate/>
+      </div>
       <Suspense key={query} fallback= { <TableTagTagSkeleton/>}>
         <TableTagTag currentPage={currentPage} query={query} key={currentPage}/>
       </Suspense>

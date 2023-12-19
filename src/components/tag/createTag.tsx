@@ -1,5 +1,4 @@
 "use client"
-import Link from 'next/link';
 import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -59,10 +58,7 @@ export default function CreateTag() {
                 {errors.category && <p className="text-red-500">{errors.category.message}</p>}
             </div>
             <div className="flex flex-col ">
-                <button className='p-2 m-2 bg-slate-500 rounded' type="submit">Submit</button>
-            </div>
-            <div className="flex flex-col ">
-                <Link href={"/forms/tag"} className='p-2 m-2 bg-slate-400 rounded' >Volver a Tag</Link>
+                <button className="bg-slate-400 p-2 m-2 rounded hover:bg-slate-500 active:bg-slate-700" type="submit">Submit</button>
             </div>
         </form>
     )

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Tag } from '../tag/Tag';
+import Link from 'next/link';
 
 const TableTagTag = async ({
   query,
@@ -18,14 +19,22 @@ const TableTagTag = async ({
             <th>Id</th>
             <th>Nombre</th>
             <th>Categoria</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {tags.map((tag) => (
-            <tr key={tag.id}>
+            <tr key={tag.id} className='m-2 p-2'>
               <td>{tag.id}</td>
               <td>{tag.name}</td>
               <td>{tag.category}</td>
+              <td>
+                <Link href={`tag/${tag.id}`} className="bg-green-400 p-1 m-2 rounded hover:bg-green-500 active:bg-green-700">Modificar</Link>
+              </td>
+            <td>
+                <Link href={`tag/${tag.id}`} className="bg-red-400 p-1 m-2 rounded hover:bg-red-500 active:bg-red-700">eliminar</Link>
+            </td>
             </tr>
           ))}
         </tbody>

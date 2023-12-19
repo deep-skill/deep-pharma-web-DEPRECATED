@@ -1,0 +1,21 @@
+'use client';
+import Modal from '../Modal';
+import React, { useState } from 'react';
+import CreateTag from '../tag/createTag';
+
+const ModalCreate = () => {
+  const [modalShow, setModalShow] = useState(false);
+
+  const openModal = () => setModalShow(true);
+  const closeModal = () => setModalShow(false);
+
+  return (
+    <div>
+      <button onClick={openModal} className="bg-blue-400 p-1 m-2 rounded hover:bg-blue-500 active:bg-blue-700">Crear Tag</button>
+      <Modal show={modalShow} onClose={closeModal}>
+        <CreateTag/>
+      </Modal>
+    </div>
+  );
+};
+export default ModalCreate
