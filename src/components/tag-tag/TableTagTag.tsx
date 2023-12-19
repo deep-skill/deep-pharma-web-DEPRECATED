@@ -8,10 +8,7 @@ const TableTagTag = async ({
   query: string;
   currentPage: number;
 }) => {
-  const tags = await getAllTag();
-
-  console.log(query);
-  console.log(currentPage);
+  const tags = await getAllTag( query , currentPage);
 
   return (
     <div>
@@ -37,10 +34,11 @@ const TableTagTag = async ({
   );
 };
 
-async function getAllTag(): Promise<Tag[]> {
+async function getAllTag(query : string , currentPage : number): Promise<Tag[]> {
+
   try {
-    const response = await axios.get('http://localhost:3001/tag');
-    return response.data;
+    const response = await axios.get(`http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`);
+    return response.data.rows;
   } catch (error) {
     console.log(error);
     return [];
