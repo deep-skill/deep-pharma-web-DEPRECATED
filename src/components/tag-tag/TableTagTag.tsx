@@ -46,8 +46,10 @@ const TableTagTag = async ({
 async function getAllTag(query : string , currentPage : number): Promise<Tag[]> {
 
   try {
-    const response = await axios.get(`http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`);
-    return response.data.rows;
+    const res = await fetch(`http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,{ cache: 'no-store' });
+    const data = await res.json()
+
+    return data.rows;
   } catch (error) {
     console.log(error);
     return [];
