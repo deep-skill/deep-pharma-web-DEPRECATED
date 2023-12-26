@@ -1,7 +1,7 @@
 'use client';
 import Modal from '../Modal';
 import React, { useState } from 'react';
-import CreateTag from '../tag/createTag';
+import DeleteTag from './DeleteTag';
 
 const ModalDelete = ({ idTag } : { idTag: number }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -11,9 +11,9 @@ const ModalDelete = ({ idTag } : { idTag: number }) => {
 
   return (
     <div>
-      <button onClick={openModal} className="bg-red-400 p-1 m-2 rounded hover:bg-red-500 active:bg-red-700">Crear Tag</button>
+      <button onClick={openModal} className="bg-red-400 p-1 m-2 rounded hover:bg-red-500 active:bg-red-700">Eliminar</button>
       <Modal show={modalShow} onClose={closeModal}>
-        <CreateTag  closeModal={closeModal}/>
+        <DeleteTag idTag={idTag} closeModal={closeModal}/>
       </Modal>
     </div>
   );
