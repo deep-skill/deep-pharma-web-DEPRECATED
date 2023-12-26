@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from 'next/link';
 import { Product } from "./Product";
 
-interface ItemTableProductProps {
+interface Props {
     product: Product;
     reloadProduct: () => void;
 }
@@ -18,12 +18,12 @@ async function deleteProduct(id: number, reloadProduct: () => void) {
 }
 
 
-const ItemTableProduct: React.FC<ItemTableProductProps> = ({ product, reloadProduct }) => {
+const ItemTableProduct = ({ product, reloadProduct } : Props) => {
     const prescriptionText = (require: number): string => {
         if (require == 0) return "No requerida";
         return "Es requerida";
     }
-    
+
     return (
         <tr key={product.id}>
             <td>{product.id}</td>

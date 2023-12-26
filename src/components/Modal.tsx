@@ -1,5 +1,3 @@
-// components/Modal.tsx
-
 import React, { ReactNode } from 'react';
 
 interface ModalProps {
@@ -29,4 +27,3 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
 };
 
 export default Modal;
-

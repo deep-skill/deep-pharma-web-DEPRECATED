@@ -13,7 +13,7 @@ const ModalCreate = () => {
     <div>
       <button onClick={openModal} className="bg-blue-400 p-1 m-2 rounded hover:bg-blue-500 active:bg-blue-700">Crear Tag</button>
       <Modal show={modalShow} onClose={closeModal}>
-        <CreateTag />
+        <CreateTag  closeModal={closeModal}/>
       </Modal>
     </div>
   );

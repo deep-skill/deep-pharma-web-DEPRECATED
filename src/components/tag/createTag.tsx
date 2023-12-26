@@ -1,6 +1,5 @@
 "use client"
 import axios from 'axios';
-import { revalidateTag } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -10,7 +9,7 @@ type FormValues = {
 }
 
 
-export default function CreateTag() {
+export default function CreateTag({ closeModal } : { closeModal :  () => void }) {
     const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
     const onSubmit: SubmitHandler<FormValues> = (data) => createTagAxios(data)
@@ -19,6 +18,7 @@ export default function CreateTag() {
         try {
             await axios.post('http://localhost:3001/tag', data)
             router.refresh()
+            closeModal()
         } catch (error) {
             console.log(error)
         }
