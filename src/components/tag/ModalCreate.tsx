@@ -1,9 +1,10 @@
 'use client';
 import Modal from '../Modal';
 import React, { useState } from 'react';
-import UpdateTag from '../tag/updateTag';
+import CreateTag from './CreateTag';
 
-const ModalUpdate = ({ idTag } : { idTag : number }) => {
+
+const ModalCreate = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const openModal = () => setModalShow(true);
@@ -11,11 +12,11 @@ const ModalUpdate = ({ idTag } : { idTag : number }) => {
 
   return (
     <div>
-      <button onClick={openModal} className="bg-green-400 p-1 m-2 rounded hover:bg-green-500 active:bg-green-700">Modificar</button>
+      <button onClick={openModal} className="bg-blue-400 p-1 m-2 rounded hover:bg-blue-500 active:bg-blue-700">Crear Tag</button>
       <Modal show={modalShow} onClose={closeModal}>
-        <UpdateTag key={idTag} idTag={idTag} closeModal={closeModal}/>
+        <CreateTag  closeModal={closeModal}/>
       </Modal>
     </div>
   );
 };
-export default ModalUpdate
+export default ModalCreate

@@ -1,4 +1,4 @@
-import { Tag } from '../tag/Tag';
+import { Tag } from './Tag';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
 
