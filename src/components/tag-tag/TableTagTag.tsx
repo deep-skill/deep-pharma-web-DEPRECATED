@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Tag } from '../tag/Tag';
 import Link from 'next/link';
+import ModalUpdate from './ModalUpdate';
 
 const TableTagTag = async ({
   query,
@@ -30,7 +31,7 @@ const TableTagTag = async ({
               <td>{tag.name}</td>
               <td>{tag.category}</td>
               <td>
-                <Link href={`tag/${tag.id}`} className="bg-green-400 p-1 m-2 rounded hover:bg-green-500 active:bg-green-700">Modificar</Link>
+                <ModalUpdate idTag={tag.id}/>
               </td>
             <td>
                 <Link href={`tag/${tag.id}`} className="bg-red-400 p-1 m-2 rounded hover:bg-red-500 active:bg-red-700">eliminar</Link>

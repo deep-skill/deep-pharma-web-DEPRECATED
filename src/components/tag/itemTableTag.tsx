@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from 'next/link';
 import { Tag } from "./Tag";
 
-interface ItemTableTafProps {
+interface Props {
     tag: Tag;
     reloadTag: () => void;
 }
@@ -17,7 +17,7 @@ async function deleteTag(id: number  , reloadTag:()=> void) {
     }
 }
 
-const ItemTableBrand: React.FC<ItemTableTafProps> = ({tag , reloadTag }) => {
+const ItemTableBrand= ({tag , reloadTag } : Props) => {
     return (
         <tr key={tag.id}>
             <td>{tag.id}</td>
