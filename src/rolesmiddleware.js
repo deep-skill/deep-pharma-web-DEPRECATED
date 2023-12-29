@@ -15,19 +15,19 @@ export async function middleware(req) {
 
   if (decoded.permissions.includes('admin')) {
     if (path === "/forms/product") {
-      return NextResponse.redirect(new URL('/acceso-denegado', req.url));
+      return NextResponse.redirect(new URL('/access-denied', req.url));
     }
     return NextResponse.next();
   }
 
   if (decoded.permissions.includes('cajero')) {
     if (path === "/forms/product") {
-      return NextResponse.redirect(new URL('/acceso-denegado', req.url));
+      return NextResponse.redirect(new URL('/access-denied', req.url));
     }
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(new URL('/acceso-denegado', req.url));
+  return NextResponse.redirect(new URL('/access-denied', req.url));
 }
 
 
