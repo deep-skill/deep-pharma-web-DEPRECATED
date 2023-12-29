@@ -2,6 +2,7 @@ import { Tag } from './Tag';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
 
+
 const TableTagTag = async ({
   query,
   currentPage,
@@ -9,8 +10,7 @@ const TableTagTag = async ({
   query: string;
   currentPage: number;
 }) => {
-  const tags = await getAllTag( query , currentPage);
-
+  const { count, rows } = await getAllTag( query , currentPage);
   return (
     <div>
       <table className="table-fixed">
@@ -24,7 +24,7 @@ const TableTagTag = async ({
           </tr>
         </thead>
         <tbody >
-          {tags.map((tag) => (
+          {rows.map((tag) => (
             <tr key={tag.id} className='m-2 p-2'>
               <td>{tag.id}</td>
               <td>{tag.name}</td>
@@ -43,16 +43,15 @@ const TableTagTag = async ({
   );
 };
 
-async function getAllTag(query : string , currentPage : number): Promise<Tag[]> {
+async function getAllTag(query : string , currentPage : number): Promise<{count : number , rows : Tag[]}> {
 
   try {
     const res = await fetch(`http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,{ cache: 'no-store' });
     const data = await res.json()
-
-    return data.rows;
+    return data;
   } catch (error) {
     console.log(error);
-    return [];
+    return { count: 0, rows: [] };
   }
 }
 
