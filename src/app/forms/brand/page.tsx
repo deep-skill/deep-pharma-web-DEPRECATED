@@ -1,11 +1,13 @@
+
 import Link from 'next/link';
 import TableBrand from "@/components/brand/tableGetAllBrand";
 
-export default function Page() {
+
+const AllBrandPage = async() => {
     return (
-        <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
+        <section  className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
             <div >
-                <h2 className="text-2xl ">Tabla Todas Las Marcas</h2>
+              <h2 className="text-2xl ">Tabla Todas Las Marcas</h2>
                 <TableBrand />
             </div>
             <div >
@@ -14,3 +16,7 @@ export default function Page() {
         </section>
     );
 }
+
+export default AllBrandPage;
+
+

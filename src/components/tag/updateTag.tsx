@@ -1,5 +1,6 @@
 "use client"
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 type FormValues = {
@@ -7,22 +8,27 @@ type FormValues = {
     category:string
 }
 
-type UpdateTagProps = {
+type Props = {
     idTag: number;
+    closeModal :  () => void
 };
 
-const updateTagAxios = async (data: FormValues, id: number) => {
-    try {
-        await axios.put(`http://localhost:3001/tag/${id}`, data)
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-const UpdateTag: React.FC<UpdateTagProps> = ({ idTag }) => {
+
+const UpdateTag = ({ idTag , closeModal} : Props) => {
+  const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const onSubmit: SubmitHandler<FormValues> = (data) => updateTagAxios(data, idTag);
 
+    const updateTagAxios = async (data: FormValues, id: number) => {
+      try {
+          await axios.put(`http://localhost:3001/tag/${id}`, data)
+          router.refresh()
+          closeModal()
+      } catch (error) {
+          console.log(error)
+      }
+  }
     return (
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col ">

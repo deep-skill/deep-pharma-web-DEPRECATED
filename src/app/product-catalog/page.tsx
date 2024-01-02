@@ -1,5 +1,4 @@
 'use client';
-
 import Search from '@/components/Search';
 import { useState, useEffect } from 'react';
 
@@ -14,16 +13,8 @@ type Product = {
   updated_at: string;
 };
 
-async function fetchData(url: string) {
-  try {
-    const result = await fetch(`http://localhost:3001/${url}`);
-    return await result.json();
-  } catch (error) {
-    throw new Error(`something went wrong: ${error}`);
-  }
-}
 
-export default function Page() {
+const ProductCatalogPage = () => {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -87,4 +78,14 @@ export default function Page() {
       </section>
     </main>
   );
+}
+export default ProductCatalogPage
+
+async function fetchData(url: string) {
+  try {
+    const result = await fetch(`http://localhost:3001/${url}`);
+    return await result.json();
+  } catch (error) {
+    throw new Error(`something went wrong: ${error}`);
+  }
 }

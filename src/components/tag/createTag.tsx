@@ -1,6 +1,6 @@
 "use client"
-import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 type FormValues = {
@@ -8,17 +8,21 @@ type FormValues = {
     category: string
 }
 
-const createTagAxios = async (data: FormValues) => {
-    try {
-        await axios.post('http://localhost:3001/tag', data)
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-export default function CreateTag() {
+export default function CreateTag({ closeModal } : { closeModal :  () => void }) {
+    const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
     const onSubmit: SubmitHandler<FormValues> = (data) => createTagAxios(data)
+
+    const createTagAxios = async (data: FormValues) => {
+        try {
+            await axios.post('http://localhost:3001/tag', data)
+            router.refresh()
+            closeModal()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <form className="flex flex-col  gap-2 " onSubmit={handleSubmit(onSubmit)}>
@@ -59,10 +63,7 @@ export default function CreateTag() {
                 {errors.category && <p className="text-red-500">{errors.category.message}</p>}
             </div>
             <div className="flex flex-col ">
-                <button className='p-2 m-2 bg-slate-500 rounded' type="submit">Submit</button>
-            </div>
-            <div className="flex flex-col ">
-                <Link href={"/forms/tag"} className='p-2 m-2 bg-slate-400 rounded' >Volver a Tag</Link>
+                <button className="bg-slate-400 p-2 m-2 rounded hover:bg-slate-500 active:bg-slate-700" type="submit">Submit</button>
             </div>
         </form>
     )
