@@ -1,7 +1,6 @@
-import { Tag } from './Tag';
+import { type Tag } from './Tag';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
-
 
 const TableTagTag = async ({
   query,
@@ -10,7 +9,7 @@ const TableTagTag = async ({
   query: string;
   currentPage: number;
 }) => {
-  const { count, rows } = await getAllTag( query , currentPage);
+  const { count, rows } = await getAllTag(query, currentPage);
   return (
     <div>
       <table className="table-fixed">
@@ -23,18 +22,18 @@ const TableTagTag = async ({
             <th>Eliminar</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           {rows.map((tag) => (
-            <tr key={tag.id} className='m-2 p-2'>
+            <tr key={tag.id} className="m-2 p-2">
               <td>{tag.id}</td>
               <td>{tag.name}</td>
               <td>{tag.category}</td>
               <td>
-                <ModalUpdate idTag={tag.id}/>
+                <ModalUpdate idTag={tag.id} />
               </td>
-            <td>
-                <ModalDelete idTag={tag.id}/>
-            </td>
+              <td>
+                <ModalDelete idTag={tag.id} />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -43,11 +42,16 @@ const TableTagTag = async ({
   );
 };
 
-async function getAllTag(query : string , currentPage : number): Promise<{count : number , rows : Tag[]}> {
-
+async function getAllTag(
+  query: string,
+  currentPage: number,
+): Promise<{ count: number; rows: Tag[] }> {
   try {
-    const res = await fetch(`http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,{ cache: 'no-store' });
-    const data = await res.json()
+    const res = await fetch(
+      `http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,
+      { cache: 'no-store' },
+    );
+    const data = await res.json();
     return data;
   } catch (error) {
     console.log(error);
