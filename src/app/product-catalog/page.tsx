@@ -13,7 +13,6 @@ type Product = {
   updated_at: string;
 };
 
-
 const ProductCatalogPage = () => {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,7 +60,10 @@ const ProductCatalogPage = () => {
         ) : products?.length ? (
           products.map((product) => {
             return (
-              <div className="w-[40rem] p-5 shadow-md shadow-slate-300 flex flex-col gap-4">
+              <div
+                key={product.id}
+                className="w-[40rem] p-5 shadow-md shadow-slate-300 flex flex-col gap-4"
+              >
                 <h3 className="text-xl setProducts">{product.name}</h3>
                 <p className="text-slate-500">{product.description}</p>
                 <p className="text">
@@ -78,8 +80,8 @@ const ProductCatalogPage = () => {
       </section>
     </main>
   );
-}
-export default ProductCatalogPage
+};
+export default ProductCatalogPage;
 
 async function fetchData(url: string) {
   try {

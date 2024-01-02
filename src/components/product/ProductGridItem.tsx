@@ -18,8 +18,8 @@ const ProductGridItem = ({ name, image, price, description }: Props) => {
             src={image}
             alt={name}
             className="w-full object-cover"
-            width={500}
-            height={500}
+            width={300}
+            height={300}
           />
         </Link>
       </div>
