@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  ignoreDuringBuilds: true,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 's.gravatar.com' },
