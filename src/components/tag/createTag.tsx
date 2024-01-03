@@ -3,8 +3,7 @@
 import { CreateTagDto } from '@/interface/tag/Tag';
 import { createTag } from '@/lib/fetch/tagFetch/tagFetch';
 import { useRouter } from 'next/navigation';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-
+import { useForm } from 'react-hook-form';
 
 
 export default function CreateTag({ closeModal }: { closeModal: () => void }) {
@@ -14,11 +13,8 @@ export default function CreateTag({ closeModal }: { closeModal: () => void }) {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateTagDto>();
-  const onSubmit: SubmitHandler<CreateTagDto> = async (data) => {
-    await createTagAxios(data);
-  };
-
-  const createTagAxios = async (data: CreateTagDto) => {
+  
+  const onSubmit = async (data : CreateTagDto) => {
     try {
       await createTag(data)
       router.refresh();

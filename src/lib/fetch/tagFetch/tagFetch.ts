@@ -1,6 +1,6 @@
 'use server'
 
-import { CreateTagDto, Tag } from "@/interface/tag/Tag";
+import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { cookies } from "next/headers";
 
 export const getAllTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
@@ -22,11 +22,10 @@ export const getAllTag = async (query: string, currentPage: number): Promise<{ c
   }
 }
 
-export const createTag = async (CreateTag: CreateTagDto) => {
-  const body = JSON.stringify(CreateTag);
-
+export const createTag = async (createTag: CreateTagDto) => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
+  const body = JSON.stringify(createTag);
 
   try {
     const res = await fetch(`http://localhost:3001/tag`, {
@@ -47,3 +46,26 @@ export const createTag = async (CreateTag: CreateTagDto) => {
   }
 };
 
+export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('authToken')
+  const body = JSON.stringify(updateTag);
+
+  try {
+    const res = await fetch(`http://localhost:3001/tag/${id}`, {
+      method: 'PUT',
+      body: body,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.value}`,
+      },
+      cache: 'no-store'
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+};

@@ -1,12 +1,8 @@
 'use client';
-import axios from 'axios';
+import { UpdateTagDto } from '@/interface/tag/Tag';
+import { updateTag } from '@/lib/fetch/tagFetch/tagFetch';
 import { useRouter } from 'next/navigation';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-
-interface FormValues {
-  name: string;
-  category: string;
-}
+import { useForm } from 'react-hook-form';
 
 interface Props {
   idTag: number;
@@ -19,20 +15,19 @@ const UpdateTag = ({ idTag, closeModal }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    await updateTagAxios(data, idTag);
-  };
+  } = useForm<UpdateTagDto>();
 
-  const updateTagAxios = async (data: FormValues, id: number) => {
+  const onSubmit = async (data:UpdateTagDto) => {
     try {
-      await axios.put(`http://localhost:3001/tag/${id}`, data);
+      await updateTag(data , idTag)
       router.refresh();
       closeModal();
     } catch (error) {
       console.log(error);
     }
   };
+
+
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col ">
