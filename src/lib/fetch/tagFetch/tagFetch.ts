@@ -1,6 +1,7 @@
 'use server'
 
 import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getAllTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
@@ -11,7 +12,10 @@ export const getAllTag = async (query: string, currentPage: number): Promise<{ c
       `http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
-        cache: 'no-store'
+        next: { 
+          revalidate: 60,
+          tags: ['getAllTag']
+        }
       }
     );
     const data = await res.json();
@@ -35,10 +39,10 @@ export const createTag = async (createTag: CreateTagDto) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token?.value}`,
       },
-      cache: 'no-store'
     });
 
     const data = await res.json();
+    revalidateTag('getAllTag')
     return data;
   } catch (error) {
     console.log(error);
@@ -59,10 +63,10 @@ export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token?.value}`,
       },
-      cache: 'no-store'
     });
 
     const data = await res.json();
+    revalidateTag('getAllTag')
     return data;
   } catch (error) {
     console.log(error);
@@ -82,10 +86,10 @@ export const deleteTag = async ( id : number) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token?.value}`,
       },
-      cache: 'no-store'
     });
 
     const data = await res.json();
+    revalidateTag('getAllTag')
     return data;
   } catch (error) {
     console.log(error);
