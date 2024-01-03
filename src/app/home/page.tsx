@@ -28,7 +28,8 @@ const HomePage = () => {
 
   return (
     <div>
-      <div>Hello {user?.name}</div>
+      <div>{user?.name}</div>
+      <div>{user?.email}</div>
     </div>
   );
 };
