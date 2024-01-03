@@ -2,7 +2,6 @@
 
 import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { revalidateTag } from "next/cache";
-import Error from "next/error";
 import { cookies } from "next/headers";
 
 export const getAllTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
@@ -27,7 +26,7 @@ export const getAllTag = async (query: string, currentPage: number): Promise<{ c
   }
 }
 
-export const getByIdTag = async (id : string) => {
+export const getByIdTag = async (id : number) => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {

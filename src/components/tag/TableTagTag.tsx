@@ -1,6 +1,6 @@
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
-import { getAllTag } from '@/lib/fetch/tagFetch/tagFetch';
+import { getAllTag, getByIdTag } from '@/lib/fetch/tagFetch/tagFetch';
 
 const TableTagTag = async ({
   query,
@@ -10,6 +10,8 @@ const TableTagTag = async ({
   currentPage: number;
 }) => {
   const { count, rows } = await getAllTag(query, currentPage);
+  const tag = await getByIdTag(41)
+
 
   return (
     <div>
