@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { deleteTag } from '@/lib/fetch/tagFetch/tagFetch';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -11,7 +11,7 @@ const DeleteTag = ({ idTag, closeModal }: Props) => {
 
   const updateTagAxios = async () => {
     try {
-      await axios.delete(`http://localhost:3001/tag/${idTag}`);
+      await deleteTag(idTag)
       router.refresh();
       closeModal();
     } catch (error) {

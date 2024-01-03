@@ -69,3 +69,26 @@ export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
     return {};
   }
 };
+
+
+export const deleteTag = async ( id : number) => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('authToken')
+
+  try {
+    const res = await fetch(`http://localhost:3001/tag/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.value}`,
+      },
+      cache: 'no-store'
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+};
