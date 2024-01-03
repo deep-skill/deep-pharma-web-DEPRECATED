@@ -1,11 +1,36 @@
-import { getAccessToken } from '@auth0/nextjs-auth0';
-import { decodeToken } from '@/lib/decodeToken';
+'use client'
+import React, { useState, useEffect } from 'react';
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { fetchToken } from '@/lib/fetch/fetchToken';
 
-const HomePage = async () => {
-  const { accessToken } = await getAccessToken();
-  const rol = decodeToken(accessToken);
+const HomePage = () => {
+  const { user, error, isLoading } = useUser();
+  
 
-  return <div>{rol}</div>;
+  useEffect(() => {
+    const getToken = async () => {
+      if (user) {
+        try {
+          await fetchToken();
+        } catch (err) {
+          console.error('Error al obtener el token:', err);
+        }
+      }
+    };
+
+    getToken();
+  }, [user]);
+
+
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  return (
+    <div>
+      <div>Hello {user?.name}</div>
+    </div>
+  );
 };
 
 export default HomePage;

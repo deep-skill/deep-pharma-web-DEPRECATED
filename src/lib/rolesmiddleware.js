@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
-import { getAccessToken } from '@auth0/nextjs-auth0/edge';
 import { jwtDecode } from 'jwt-decode';
+import { cookies } from 'next/headers'
 
 export async function middleware(req) {
-  const { accessToken } = await getAccessToken(req);
+  const cookieStore = cookies()
+    const accessToken = cookieStore.get('authToken')
 
   if (!accessToken) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
-
-  const decoded = jwtDecode(accessToken);
+  const decoded = jwtDecode(accessToken.value);
 
   const path = new URL(req.url).pathname;
 

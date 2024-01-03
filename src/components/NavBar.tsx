@@ -33,6 +33,7 @@ const NavBar = () => {
         <Link href="/forms/brand" className={styleLink}>
           Brands
         </Link>
+        
         <Link href={'/forms/product'} className={styleLink}>
           Product
         </Link>

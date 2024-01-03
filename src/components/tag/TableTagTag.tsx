@@ -1,6 +1,7 @@
 import { type Tag } from './Tag';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
+import { cookies } from 'next/headers'
 
 const TableTagTag = async ({
   query,
@@ -10,6 +11,7 @@ const TableTagTag = async ({
   currentPage: number;
 }) => {
   const { count, rows } = await getAllTag(query, currentPage);
+
   return (
     <div>
       <table className="table-fixed">
@@ -42,14 +44,15 @@ const TableTagTag = async ({
   );
 };
 
-async function getAllTag(
-  query: string,
-  currentPage: number,
-): Promise<{ count: number; rows: Tag[] }> {
+const getAllTag = async (query : any, currentPage: any): Promise<{ count: number; rows: Tag[] }> => {
   try {
+  
+    const cookieStore = cookies()
+    const token = cookieStore.get('authToken')
+  
     const res = await fetch(
       `http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,
-      { cache: 'no-store' },
+      { headers: { Authorization: `Bearer ${token?.value}` }  , cache: 'no-store' }
     );
     const data = await res.json();
     return data;
