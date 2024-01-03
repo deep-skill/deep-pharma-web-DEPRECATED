@@ -2,6 +2,7 @@
 
 import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { revalidateTag } from "next/cache";
+import Error from "next/error";
 import { cookies } from "next/headers";
 
 export const getAllTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
@@ -23,6 +24,28 @@ export const getAllTag = async (query: string, currentPage: number): Promise<{ c
   } catch (error) {
     console.log(error);
     return { count: 0, rows: [] };
+  }
+}
+
+export const getByIdTag = async (id : string) => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('authToken')
+  try {
+    const res = await fetch(
+      `http://localhost:3001/tag/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token?.value}` },
+        next: { 
+          revalidate: 60,
+          tags: [`getByIdTag${id}`]
+        }
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
   }
 }
 
@@ -67,6 +90,7 @@ export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
 
     const data = await res.json();
     revalidateTag('getAllTag')
+    revalidateTag(`getByIdTag${id}`)
     return data;
   } catch (error) {
     console.log(error);
@@ -90,6 +114,7 @@ export const deleteTag = async ( id : number) => {
 
     const data = await res.json();
     revalidateTag('getAllTag')
+    revalidateTag(`getByIdTag${id}`)
     return data;
   } catch (error) {
     console.log(error);
