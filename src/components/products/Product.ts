@@ -1,5 +1,6 @@
+import { Tag } from '@/interface/tag/Tag';
 import { type Brand } from '../brand/Brand';
-import { type Tag } from '../tag/Tag';
+
 
 export interface Product {
   id: number;

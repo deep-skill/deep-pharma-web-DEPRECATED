@@ -3,8 +3,10 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { type Tag } from '../tag/Tag';
+
 import { type Brand } from '../brand/Brand';
+
+
 
 interface FormValues {
   name: string;
@@ -29,7 +31,7 @@ export default function CreateProduct() {
     formState: { errors },
   } = useForm<FormValues>();
   const [brands, setBrands] = useState<Brand[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
+  const [tags, setTags] = useState<any[]>([]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (typeof data.brandId === 'string')
@@ -173,7 +175,7 @@ export default function CreateProduct() {
   );
 }
 
-async function getAllTag(): Promise<Tag[]> {
+async function getAllTag(): Promise<any[]> {
   try {
     const response = await axios.get('http://localhost:3001/tag');
     return response.data;

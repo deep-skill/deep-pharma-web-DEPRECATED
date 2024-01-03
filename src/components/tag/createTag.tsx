@@ -1,12 +1,11 @@
 'use client';
-import axios from 'axios';
+
+import { CreateTagDto } from '@/interface/tag/Tag';
+import { createTag } from '@/lib/fetch/tagFetch/tagFetch';
 import { useRouter } from 'next/navigation';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-interface FormValues {
-  name: string;
-  category: string;
-}
+
 
 export default function CreateTag({ closeModal }: { closeModal: () => void }) {
   const router = useRouter();
@@ -14,14 +13,14 @@ export default function CreateTag({ closeModal }: { closeModal: () => void }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  } = useForm<CreateTagDto>();
+  const onSubmit: SubmitHandler<CreateTagDto> = async (data) => {
     await createTagAxios(data);
   };
 
-  const createTagAxios = async (data: FormValues) => {
+  const createTagAxios = async (data: CreateTagDto) => {
     try {
-      await axios.post('http://localhost:3001/tag', data);
+      await createTag(data)
       router.refresh();
       closeModal();
     } catch (error) {

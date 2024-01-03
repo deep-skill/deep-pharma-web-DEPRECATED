@@ -1,7 +1,6 @@
-import { type Tag } from './Tag';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
-import { cookies } from 'next/headers'
+import { getAllTag } from '@/lib/fetch/tagFetch/tagFetch';
 
 const TableTagTag = async ({
   query,
@@ -43,23 +42,5 @@ const TableTagTag = async ({
     </div>
   );
 };
-
-const getAllTag = async (query : any, currentPage: any): Promise<{ count: number; rows: Tag[] }> => {
-  try {
-  
-    const cookieStore = cookies()
-    const token = cookieStore.get('authToken')
-  
-    const res = await fetch(
-      `http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,
-      { headers: { Authorization: `Bearer ${token?.value}` }  , cache: 'no-store' }
-    );
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-    return { count: 0, rows: [] };
-  }
-}
 
 export default TableTagTag;
