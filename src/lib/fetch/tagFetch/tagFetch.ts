@@ -4,7 +4,29 @@ import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-export const getAllTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
+export const getAllTag = async (): Promise<Tag[]> => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('authToken')
+  try {
+    const res = await fetch(
+      `http://localhost:3001/tag`,
+      {
+        headers: { Authorization: `Bearer ${token?.value}` },
+        next: { 
+          revalidate: 60,
+          tags: ['getAllTag']
+        }
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [] ;
+  }
+}
+
+export const getSearchTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {

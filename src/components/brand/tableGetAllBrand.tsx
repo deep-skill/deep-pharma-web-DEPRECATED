@@ -1,4 +1,4 @@
-import { getAllBrand } from '@/lib/fetch/brandFetch/brandFetch';
+import { getSearchBrand } from '@/lib/fetch/brandFetch/brandFetch';
 import ModalUpdateBrand from './ModalUpdateBrand';
 import ModalDeleteBrand from './ModalDeleteBrand';
 
@@ -10,7 +10,7 @@ const TableBrand = async ({
   query: string;
   currentPage: number;
 }) => {
-  const brands = await getAllBrand(query, currentPage);
+  const brands = await getSearchBrand(query, currentPage);
 
   return (
     <div>
