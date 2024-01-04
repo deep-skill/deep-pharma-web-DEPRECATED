@@ -3,6 +3,7 @@ import SearchTag from '@/components/SearchTable';
 import { Suspense } from 'react';
 import ModalCreateBrand from '@/components/brand/ModalCreateBrand';
 import TableTagTagSkeleton from '@/components/tag/TableTagTagSkeleton';
+import SearchTable from '@/components/SearchTable';
 
 const AllBrandPage = async ({
   searchParams,
@@ -19,7 +20,7 @@ const AllBrandPage = async ({
   return (
     <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
       <div>
-      <SearchTag placeholder="" />
+      <SearchTable placeholder="" />
       <ModalCreateBrand/>
       </div>
       <div>

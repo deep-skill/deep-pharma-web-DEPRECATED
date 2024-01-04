@@ -1,5 +1,6 @@
-import { type Product } from '@/components/products/Product';
-import UpdateProduct from '@/components/products/updateProduct';
+
+import UpdateProduct from '@/components/products/UpdateProduct';
+import { Product } from '@/interface/product/Product';
 import axios from 'axios';
 import Link from 'next/link';
 

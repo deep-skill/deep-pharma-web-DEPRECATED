@@ -1,5 +1,5 @@
 'use client';
-import CreateProduct from '@/components/products/createProduct';
+import CreateProduct from '@/components/products/CreateProduct';
 
 const PageCreateProduct = () => {
   return (

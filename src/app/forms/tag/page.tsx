@@ -3,6 +3,7 @@ import SearchTag from '@/components/SearchTable';
 import TableTagTag from '@/components/tag/TableTagTag';
 import TableTagTagSkeleton from '@/components/tag/TableTagTagSkeleton';
 import { Suspense } from 'react';
+import SearchTable from '@/components/SearchTable';
 
 const AllTagPage = ({
   searchParams,
@@ -18,7 +19,7 @@ const AllTagPage = ({
   return (
     <section className="flex flex-col align-center justify-center items-center w-full p-2 bg-slate-300 gap-3">
       <div className="flex">
-        <SearchTag placeholder="" />
+        <SearchTable placeholder="" />
         <ModalCreate />
       </div>
       <Suspense key={query} fallback={<TableTagTagSkeleton />}>

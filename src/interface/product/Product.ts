@@ -1,8 +1,6 @@
 import { Brand } from '@/interface/brand/Brand';
 import { Tag } from '@/interface/tag/Tag';
 
-
-
 export interface Product {
   id: number;
   brand_id: number;
@@ -15,3 +13,13 @@ export interface Product {
   brand?: Brand;
   tags?: Tag[];
 }
+
+export interface CreateProductDto {
+  name: string;
+  description?: string;
+  prescriptionRequired?: number;
+  brandId: number;
+  tagIds: number[];
+}
+
+export interface UpdateProductDto extends CreateProductDto { }
