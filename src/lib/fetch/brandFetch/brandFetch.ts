@@ -75,7 +75,7 @@ export const updateBrand = async (updateBrand: UpdateBrandDto, id : number) => {
   }
 };
 
-export const deleteTag = async ( id : number) => {
+export const deleteBrand = async ( id : number) => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
 
