@@ -1,4 +1,5 @@
 import { getAllProduct } from "@/lib/fetch/productFetch/productFetch";
+import ModalUpdateProduct from "./ModalUpdateProduct";
 
 
 const TableProduct = async ({
@@ -31,7 +32,7 @@ const TableProduct = async ({
               <td>{product.prescription_required === 1 ? 'Requerida' : 'No Requerida'}</td>
               <td>{product.brand?.name}</td>
               <td>{product.tags?.toString()}</td>
-              <td>Editar</td>
+              <td><ModalUpdateProduct idProduct={product.id}/></td>
               <td>Eliminado</td>
           </tr>
           ))}

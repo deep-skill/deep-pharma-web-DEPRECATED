@@ -74,10 +74,11 @@ export const createProduct = async (createProduct: CreateProductDto) => {
 };
 
 export const updateProduct = async (updateProduct: UpdateProductDto, id : number) => {
+
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   const body = JSON.stringify(updateProduct);
-
+  console.log(id)
   try {
     const res = await fetch(`http://localhost:3001/product/${id}`, {
       method: 'PUT',
@@ -89,6 +90,7 @@ export const updateProduct = async (updateProduct: UpdateProductDto, id : number
     });
 
     const data = await res.json();
+    console.log(data)
     revalidateTag('getAllProduct')
     revalidateTag(`getByIdProduct${id}`)
     return data;
