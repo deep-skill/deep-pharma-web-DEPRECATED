@@ -2,9 +2,8 @@
 import axios from 'axios';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-
-import { type Brand } from '../brand/Brand';
 import { Tag } from '@/interface/tag/Tag';
+import { Brand } from '@/interface/brand/Brand';
 
 interface FormValues {
   name: string;

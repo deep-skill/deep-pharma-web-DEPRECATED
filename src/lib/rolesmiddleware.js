@@ -14,9 +14,6 @@ export async function middleware(req) {
   const path = new URL(req.url).pathname;
 
   if (decoded.permissions.includes('admin')) {
-    if (path === '/forms/product') {
-      return NextResponse.redirect(new URL('/access-denied', req.url));
-    }
     return NextResponse.next();
   }
 

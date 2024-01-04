@@ -26,6 +26,29 @@ export const getAllBrand = async (query: string, currentPage: number): Promise<B
   }
 }
 
+
+export const getByIdBrand = async (id : number) => {
+  const cookieStore = cookies()
+  const token = cookieStore.get('authToken')
+  try {
+    const res = await fetch(
+      `http://localhost:3001/brand/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token?.value}` },
+        next: { 
+          revalidate: 60,
+          tags: [`getByIdBrand${id}`]
+        }
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+}
+
 export const createBrand = async (createBrand: CreateBrandDto) => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
