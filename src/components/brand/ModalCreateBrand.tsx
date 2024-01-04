@@ -1,7 +1,7 @@
 'use client';
 import Modal from '../Modal';
 import { useState } from 'react';
-import CreateBrand from './createBrand';
+import CreateBrand from './CreateBrand';
 
 const ModalCreateBrand = () => {
   const [modalShow, setModalShow] = useState(false);

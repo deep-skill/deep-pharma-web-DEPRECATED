@@ -1,6 +1,6 @@
-import ModalUpdate from './ModalUpdate';
-import ModalDelete from './ModalDelete';
-import { getAllTag, getByIdTag } from '@/lib/fetch/tagFetch/tagFetch';
+import ModalUpdate from './ModalUpdateTag';
+import ModalDelete from './ModalDeleteTag';
+import { getAllTag } from '@/lib/fetch/tagFetch/tagFetch';
 
 const TableTagTag = async ({
   query,

@@ -1,7 +1,7 @@
 'use client';
 import Modal from '../Modal';
 import React, { useState } from 'react';
-import CreateTag from '@/components/tag/createTag';
+
 
 const ModalCreate = () => {
   const [modalShow, setModalShow] = useState(false);

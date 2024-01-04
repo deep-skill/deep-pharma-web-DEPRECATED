@@ -1,31 +1,23 @@
 'use client';
-import axios from 'axios';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-
-interface FormValues {
-  name: string;
-}
+import { UpdateBrandDto } from '@/interface/brand/Brand';
+import { updateBrand } from '@/lib/fetch/brandFetch/brandFetch';
+import { useForm } from 'react-hook-form';
 
 interface UpdateBrandProps {
   idBrand: number;
+  closeModal: () => void;
 }
 
-const updateBranAxios = async (data: FormValues, id: number) => {
-  try {
-    await axios.put(`/api/brand_api/${id}`, data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const UpdateBrand: React.FC<UpdateBrandProps> = ({ idBrand }) => {
+const UpdateBrand = ({ idBrand , closeModal }: UpdateBrandProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    await updateBranAxios(data, idBrand);
+  } = useForm<UpdateBrandDto>();
+
+  const onSubmit = async (data : UpdateBrandDto) => {
+    await updateBrand(data , idBrand)
+    closeModal()
   };
 
   return (

@@ -1,7 +1,7 @@
 'use client';
 import Modal from '../Modal';
 import React, { useState } from 'react';
-import UpdateTag from '@/components/tag/updateTag';
+import UpdateTag from '@/components/tag/UpdateTag';
 
 const ModalUpdate = ({ idTag }: { idTag: number }) => {
   const [modalShow, setModalShow] = useState(false);

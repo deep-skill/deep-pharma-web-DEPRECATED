@@ -1,4 +1,4 @@
-import ModalCreate from '@/components/tag/ModalCreate';
+import ModalCreate from '@/components/tag/ModalCreateTag';
 import SearchTag from '@/components/SearchTable';
 import TableTagTag from '@/components/tag/TableTagTag';
 import TableTagTagSkeleton from '@/components/tag/TableTagTagSkeleton';

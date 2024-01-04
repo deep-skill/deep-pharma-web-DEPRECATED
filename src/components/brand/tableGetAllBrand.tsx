@@ -1,4 +1,5 @@
 import { getAllBrand } from '@/lib/fetch/brandFetch/brandFetch';
+import ModalUpdateBrand from './ModalUpdateBrand';
 
 const TableBrand = async ({
   query,
@@ -25,6 +26,7 @@ const TableBrand = async ({
             <tr key={brand.id}>
               <td>{brand.id}</td>
               <td>{brand.name}</td>
+              <td><ModalUpdateBrand idBrand={brand.id}/></td>
             </tr>
           ))}
         </tbody>
