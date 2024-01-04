@@ -1,5 +1,5 @@
 import ModalCreate from '@/components/tag/ModalCreate';
-import SearchTag from '@/components/tag/SearchTag';
+import SearchTag from '@/components/SearchTable';
 import TableTagTag from '@/components/tag/TableTagTag';
 import TableTagTagSkeleton from '@/components/tag/TableTagTagSkeleton';
 import { Suspense } from 'react';

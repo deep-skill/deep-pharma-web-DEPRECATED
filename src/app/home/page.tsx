@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { fetchToken } from '@/lib/fetch/fetchToken';
 

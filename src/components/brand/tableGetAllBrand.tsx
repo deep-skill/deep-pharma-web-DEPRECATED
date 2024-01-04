@@ -1,28 +1,13 @@
-'use client';
-import { useState, useEffect } from 'react';
-import ItemTableBrand from './itemTableBrand';
-import { type Brand } from './Brand';
+import { getAllBrand } from '@/lib/fetch/brandFetch/brandFetch';
 
-const TableBrand: React.FC = () => {
-  const [brands, setBrands] = useState<Brand[]>([]);
-  const [reload, setReload] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/brand_api');
-        const brandsData = await res.json();
-        setBrands(brandsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [reload]);
-
-  const reloadBrand = () => {
-    setReload(!reload);
-  };
+const TableBrand = async ({
+  query,
+  currentPage,
+}: {
+  query: string;
+  currentPage: number;
+}) => {
+  const brands = await getAllBrand(query, currentPage);
 
   return (
     <div>
@@ -37,11 +22,10 @@ const TableBrand: React.FC = () => {
         </thead>
         <tbody>
           {brands.map((brand) => (
-            <ItemTableBrand
-              key={brand.id}
-              brand={brand}
-              reloadBrand={reloadBrand}
-            />
+            <tr key={brand.id}>
+              <td>{brand.id}</td>
+              <td>{brand.name}</td>
+            </tr>
           ))}
         </tbody>
       </table>

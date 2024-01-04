@@ -1,28 +1,18 @@
 'use client';
-import Link from 'next/link';
-import axios from 'axios';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { CreateBrandDto } from '@/interface/brand/Brand';
+import { createBrand } from '@/lib/fetch/brandFetch/brandFetch';
 
-interface FormValues {
-  name: string;
-}
-
-const createBranAxios = async (data: FormValues) => {
-  try {
-    await axios.post('/api/brand_api', data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export default function CreateBrand() {
+const CreateBrand = ({ closeModal }: { closeModal: () => void }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    await createBranAxios(data);
+  } = useForm<CreateBrandDto>();
+
+  const onSubmit = async (data : CreateBrandDto) => {
+    await createBrand(data);
+    closeModal()
   };
 
   return (
@@ -50,11 +40,8 @@ export default function CreateBrand() {
           Submit
         </button>
       </div>
-      <div className="flex flex-col ">
-        <Link href={'/forms/brand'} className="p-2 m-2 bg-slate-400 rounded">
-          Volver a Brand
-        </Link>
-      </div>
     </form>
   );
 }
+
+export default CreateBrand
