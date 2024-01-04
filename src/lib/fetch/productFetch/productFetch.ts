@@ -100,7 +100,7 @@ export const updateProduct = async (updateProduct: UpdateProductDto, id : number
   }
 };
 
-export const deleteBrand = async ( id : number) => {
+export const deleteProduct = async ( id : number) => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
 
@@ -114,6 +114,7 @@ export const deleteBrand = async ( id : number) => {
     });
 
     const data = await res.json();
+    console.log(data)
     revalidateTag('getAllProduct')
     revalidateTag(`getByIdProduct${id}`)
     return data;

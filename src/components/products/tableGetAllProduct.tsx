@@ -1,5 +1,6 @@
 import { getAllProduct } from "@/lib/fetch/productFetch/productFetch";
 import ModalUpdateProduct from "./ModalUpdateProduct";
+import ModalDeleteProduct from "./ModalDeleteProduct";
 
 
 const TableProduct = async ({
@@ -33,7 +34,7 @@ const TableProduct = async ({
               <td>{product.brand?.name}</td>
               <td>{product.tags?.toString()}</td>
               <td><ModalUpdateProduct idProduct={product.id}/></td>
-              <td>Eliminado</td>
+              <td><ModalDeleteProduct idProduct={product.id}/></td>
           </tr>
           ))}
         </tbody>
