@@ -4,12 +4,14 @@ import { CreateProductDto, Product, UpdateProductDto } from "@/interface/product
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
+const URL = process.env.FETCH_URL
+
 export const getAllProduct = async (query: string, currentPage: number): Promise<Product[] > => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/product`,
+      `${URL}/product`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: {
@@ -32,7 +34,7 @@ export const getByIdProduct = async (id : number) => {
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/product/${id}`,
+      `${URL}/product/${id}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -55,7 +57,7 @@ export const createProduct = async (createProduct: CreateProductDto) => {
   const body = JSON.stringify(createProduct);
 
   try {
-    const res = await fetch(`http://localhost:3001/product`, {
+    const res = await fetch(`${URL}/product`, {
       method: 'POST',
       body: body,
       headers: {
@@ -80,7 +82,7 @@ export const updateProduct = async (updateProduct: UpdateProductDto, id : number
   const body = JSON.stringify(updateProduct);
   console.log(id)
   try {
-    const res = await fetch(`http://localhost:3001/product/${id}`, {
+    const res = await fetch(`${URL}/product/${id}`, {
       method: 'PUT',
       body: body,
       headers: {
@@ -105,7 +107,7 @@ export const deleteProduct = async ( id : number) => {
   const token = cookieStore.get('authToken')
 
   try {
-    const res = await fetch(`http://localhost:3001/product/${id}`, {
+    const res = await fetch(`${URL}/product/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

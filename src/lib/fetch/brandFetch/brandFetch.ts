@@ -4,12 +4,14 @@ import { Brand, CreateBrandDto, UpdateBrandDto } from "@/interface/brand/Brand";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
+const URL = process.env.FETCH_URL
+
 export const getAllBrand = async (): Promise<Brand[]> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/brand`,
+      `${URL}/brand`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: {
@@ -31,7 +33,7 @@ export const getSearchBrand = async (query: string, currentPage: number): Promis
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/brand`,
+      `${URL}/brand`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: {
@@ -54,7 +56,7 @@ export const getByIdBrand = async (id : number) => {
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/brand/${id}`,
+      `${URL}/brand/${id}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -77,7 +79,7 @@ export const createBrand = async (createBrand: CreateBrandDto) => {
   const body = JSON.stringify(createBrand);
 
   try {
-    const res = await fetch(`http://localhost:3001/brand`, {
+    const res = await fetch(`${URL}/brand`, {
       method: 'POST',
       body: body,
       headers: {
@@ -101,7 +103,7 @@ export const updateBrand = async (updateBrand: UpdateBrandDto, id : number) => {
   const body = JSON.stringify(updateBrand);
 
   try {
-    const res = await fetch(`http://localhost:3001/brand/${id}`, {
+    const res = await fetch(`${URL}/brand/${id}`, {
       method: 'PUT',
       body: body,
       headers: {
@@ -125,7 +127,7 @@ export const deleteBrand = async ( id : number) => {
   const token = cookieStore.get('authToken')
 
   try {
-    const res = await fetch(`http://localhost:3001/brand/${id}`, {
+    const res = await fetch(`${URL}/brand/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

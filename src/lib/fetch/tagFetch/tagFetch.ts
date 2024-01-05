@@ -4,12 +4,14 @@ import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
+const URL = process.env.FETCH_URL
+
 export const getAllTag = async (): Promise<Tag[]> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/tag`,
+      `${URL}/tag`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -31,7 +33,7 @@ export const getSearchTag = async (query: string, currentPage: number): Promise<
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/tag-search?query=${query}&limit=10&page=${currentPage}`,
+      `${URL}/tag-search?query=${query}&limit=10&page=${currentPage}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -53,7 +55,7 @@ export const getByIdTag = async (id : number) => {
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `http://localhost:3001/tag/${id}`,
+      `${URL}/tag/${id}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -76,7 +78,7 @@ export const createTag = async (createTag: CreateTagDto) => {
   const body = JSON.stringify(createTag);
 
   try {
-    const res = await fetch(`http://localhost:3001/tag`, {
+    const res = await fetch(`${URL}/tag`, {
       method: 'POST',
       body: body,
       headers: {
@@ -100,7 +102,7 @@ export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
   const body = JSON.stringify(updateTag);
 
   try {
-    const res = await fetch(`http://localhost:3001/tag/${id}`, {
+    const res = await fetch(`${URL}/tag/${id}`, {
       method: 'PUT',
       body: body,
       headers: {
@@ -125,7 +127,7 @@ export const deleteTag = async ( id : number) => {
   const token = cookieStore.get('authToken')
 
   try {
-    const res = await fetch(`http://localhost:3001/tag/${id}`, {
+    const res = await fetch(`${URL}/tag/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
