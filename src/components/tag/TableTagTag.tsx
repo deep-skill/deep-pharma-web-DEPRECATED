@@ -1,6 +1,7 @@
 import ModalUpdate from './ModalUpdateTag';
 import ModalDelete from './ModalDeleteTag';
 import { getSearchTag } from '@/lib/fetch/tagFetch/tagFetch';
+import ModalError from '../ModalError';
 
 
 const TableTagTag = async ({
@@ -10,7 +11,14 @@ const TableTagTag = async ({
   query: string;
   currentPage: number;
 }) => {
-  const { count, rows } = await getSearchTag(query, currentPage);
+  const { count, rows , error } = await getSearchTag(query, currentPage);
+
+  if(error){
+
+    return <div>
+      <ModalError error={error.message}/>
+    </div>
+  }
 
   return (
     <div>

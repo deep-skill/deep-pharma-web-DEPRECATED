@@ -19,7 +19,7 @@ const ModalCreateBrand = () => {
         onClick={openModal}
         className="bg-blue-400 p-1 m-2 rounded hover:bg-blue-500 active:bg-blue-700"
       >
-        Crear Tag
+        Crear Brand
       </button>
       <Modal show={modalShow} onClose={closeModal}>
         <CreateBrand closeModal={closeModal}/>

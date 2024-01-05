@@ -1,17 +1,16 @@
 'use server'
 
+import { URL_FETCH } from "@/interface/constsGlobal";
 import { CreateTagDto, Tag, UpdateTagDto } from "@/interface/tag/Tag";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-
-const URL = process.env.FETCH_URL
 
 export const getAllTag = async (): Promise<Tag[]> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `${URL}/tag`,
+      `${URL_FETCH}/tag`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -28,12 +27,12 @@ export const getAllTag = async (): Promise<Tag[]> => {
   }
 }
 
-export const getSearchTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] }> => {
+export const getSearchTag = async (query: string, currentPage: number): Promise<{ count: number; rows: Tag[] , error : any}> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `${URL}/tag-search?query=${query}&limit=10&page=${currentPage}`,
+      `${URL_FETCH}/tag-search?query=${query}&limit=10&page=${currentPage}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -43,10 +42,15 @@ export const getSearchTag = async (query: string, currentPage: number): Promise<
       }
     );
     const data = await res.json();
-    return data;
+    if (typeof data.count === 'number' && Array.isArray(data.rows)) {
+      return data;
+    } else {
+      return { count: 0, rows: [], error: data };
+    }
+    
   } catch (error) {
     console.log(error);
-    return { count: 0, rows: [] };
+    return { count: 0, rows: [] , error};
   }
 }
 
@@ -55,7 +59,7 @@ export const getByIdTag = async (id : number) => {
   const token = cookieStore.get('authToken')
   try {
     const res = await fetch(
-      `${URL}/tag/${id}`,
+      `${URL_FETCH}/tag/${id}`,
       {
         headers: { Authorization: `Bearer ${token?.value}` },
         next: { 
@@ -78,7 +82,7 @@ export const createTag = async (createTag: CreateTagDto) => {
   const body = JSON.stringify(createTag);
 
   try {
-    const res = await fetch(`${URL}/tag`, {
+    const res = await fetch(`${URL_FETCH}/tag`, {
       method: 'POST',
       body: body,
       headers: {
@@ -102,7 +106,7 @@ export const updateTag = async (updateTag: UpdateTagDto , id : number) => {
   const body = JSON.stringify(updateTag);
 
   try {
-    const res = await fetch(`${URL}/tag/${id}`, {
+    const res = await fetch(`${URL_FETCH}/tag/${id}`, {
       method: 'PUT',
       body: body,
       headers: {
@@ -127,7 +131,7 @@ export const deleteTag = async ( id : number) => {
   const token = cookieStore.get('authToken')
 
   try {
-    const res = await fetch(`${URL}/tag/${id}`, {
+    const res = await fetch(`${URL_FETCH}/tag/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
