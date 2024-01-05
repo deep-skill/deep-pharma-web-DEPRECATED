@@ -8,9 +8,6 @@ const ModalError = ({ error }: { error: string }) => {
   const [modalShow, setModalShow] = useState(true);
   const router = useRouter();
 
-  const openModal = () => {
-    setModalShow(true);
-  };
   const closeModal = () => {
     setModalShow(false);
   };
@@ -18,6 +15,16 @@ const ModalError = ({ error }: { error: string }) => {
   const redirect = () => {
     router.push('/');
   };
+
+  switch(error){
+    case 'fetch failed':
+      error = 'LEVANTA LA API PAPA FRITA' 
+      break
+    case 'Insufficient permissions':
+      error = 'Sin permiso para ingesar'
+      break
+    default:
+  }
 
   return (
     <div>

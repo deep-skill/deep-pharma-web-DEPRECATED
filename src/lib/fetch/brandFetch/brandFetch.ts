@@ -27,7 +27,7 @@ export const getAllBrand = async (): Promise<Brand[]> => {
   }
 }
 
-export const getSearchBrand = async (query: string, currentPage: number): Promise<Brand[] > => {
+export const getSearchBrand = async (query: string, currentPage: number): Promise<{brands: Brand[], error : any }> => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
@@ -42,10 +42,16 @@ export const getSearchBrand = async (query: string, currentPage: number): Promis
       }
     );
     const data = await res.json();
+    if (Array.isArray(data)) {
+      return {brands: data , error:''};
+    } else {
+      return { brands: [], error: data };
+    }
+
     return data;
   } catch (error) {
     console.log(error);
-    return [] ;
+    return {brands:[] , error} ;
   }
 }
 

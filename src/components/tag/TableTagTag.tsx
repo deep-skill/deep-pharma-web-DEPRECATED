@@ -14,7 +14,6 @@ const TableTagTag = async ({
   const { count, rows , error } = await getSearchTag(query, currentPage);
 
   if(error){
-
     return <div>
       <ModalError error={error.message}/>
     </div>
