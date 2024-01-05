@@ -1,49 +1,48 @@
-"use client"
-import { useState, useEffect } from "react";
-import ItemTableBrand from "./itemTableBrand";
-import { Brand } from "./Brand";
+import { getSearchBrand } from '@/lib/fetch/brandFetch/brandFetch';
+import ModalUpdateBrand from './ModalUpdateBrand';
+import ModalDeleteBrand from './ModalDeleteBrand';
+import ModalError from '../ModalError';
 
-const TableBrand: React.FC = () => {
-    const [brands, setBrands] = useState<Brand[]>([]);
-    const [ reload , setReload] = useState(true)
 
-    useEffect(() => {
-      const fetchData = async () => {
-          try {
-              const res = await fetch('/api/brand_api');
-              const brandsData = await res.json();
-              setBrands(brandsData);
-          } catch (error) {
-              console.log(error);
-          }
-      };
-      fetchData();
-  }, [reload]);
+const TableBrand = async ({
+  query,
+  currentPage,
+}: {
+  query: string;
+  currentPage: number;
+}) => {
+  const  brands = await getSearchBrand(query, currentPage);
+console.log(brands)
+  if(brands.error !== ''){
+    return <div>
+      <ModalError error={brands.error.message}/>
+    </div>
+  }
 
-    const reloadBrand = () =>{
-        setReload(!reload)
-    }
-
-    return (
-        <div>
-            <table className="table-fixed">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Editar</th>
-                        <th>Eliminado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {brands.map((brand) => (
-                        <ItemTableBrand key={brand.id} brand={brand} reloadBrand={reloadBrand} />
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
+  return (
+    <div>
+      <table className="table-fixed">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Eliminado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {brands.brands.map((brand) => (
+            <tr key={brand.id}>
+              <td>{brand.id}</td>
+              <td>{brand.name}</td>
+              <td><ModalUpdateBrand idBrand={brand.id}/></td>
+              <td><ModalDeleteBrand  idBrand={brand.id}/></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
-
 
 export default TableBrand;
