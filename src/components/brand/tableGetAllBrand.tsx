@@ -11,11 +11,10 @@ const TableBrand = async ({
   query: string;
   currentPage: number;
 }) => {
-  const  brands = await getSearchBrand(query, currentPage);
-console.log(brands)
-  if(brands.error !== ''){
+  const  { brands , error } = await getSearchBrand(query, currentPage);
+  if(error !== ''){
     return <div>
-      <ModalError error={brands.error.message}/>
+      <ModalError error={ error.message }/>
     </div>
   }
 
@@ -31,7 +30,7 @@ console.log(brands)
           </tr>
         </thead>
         <tbody>
-          {brands.brands.map((brand) => (
+          {brands.map((brand) => (
             <tr key={brand.id}>
               <td>{brand.id}</td>
               <td>{brand.name}</td>

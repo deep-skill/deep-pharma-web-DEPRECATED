@@ -5,7 +5,7 @@ import { CreateProductDto, Product, UpdateProductDto } from "@/interface/product
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-export const getAllProduct = async (query: string, currentPage: number): Promise<Product[] > => {
+export const getAllProduct = async (query: string, currentPage: number): Promise<{products : Product[] , error : any} > => {
   const cookieStore = cookies()
   const token = cookieStore.get('authToken')
   try {
@@ -20,10 +20,15 @@ export const getAllProduct = async (query: string, currentPage: number): Promise
       }
     );
     const data = await res.json();
+    if (Array.isArray(data)) {
+      return {products: data , error:''};
+    } else {
+      return { products: [], error: data };
+    }
     return data;
   } catch (error) {
     console.log(error);
-    return [] ;
+    return {products:[] , error };
   }
 }
 

@@ -1,6 +1,7 @@
 import { getAllProduct } from "@/lib/fetch/productFetch/productFetch";
 import ModalUpdateProduct from "./ModalUpdateProduct";
 import ModalDeleteProduct from "./ModalDeleteProduct";
+import ModalError from "../ModalError";
 
 
 const TableProduct = async ({
@@ -10,7 +11,13 @@ const TableProduct = async ({
   query: string;
   currentPage: number;
 }) => {
-  const products = await getAllProduct(query , currentPage)
+  const { products , error}  = await getAllProduct(query , currentPage)
+  if(error !== ''){
+    return <div>
+      <ModalError error={error.message}/>
+    </div>
+  }
+  
   return (
     <div>
       <table className="table-fixed">
